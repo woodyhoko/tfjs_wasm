@@ -14,7 +14,7 @@ python2 -m SimpleHTTPServer 8000
 ### Step 2
 Install dependencies
 ```
-pip install -U selenium numpy tqdm matplotlib
+pip install -U selenium numpy tqdm matplotlib --user
 ```
 ### Step 3
 Install chrome, edge and firefox browser
