@@ -1,0 +1,172 @@
+<html>
+
+<head></head>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-wasm"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-wasm/dist/tf-backend-wasm.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-webgl/dist/tf-backend-webgl.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.1">
+</script> -->
+<img id="img" src="test.jpg"></img>
+<script>
+    async function run(m) {
+        const d = Date.now();
+        const userInput = tf.browser.fromPixels(document.getElementById('img'));
+        const userInput_reshape = userInput.reshape([1, 1333, 2000, 3]);
+        const tfff = userInput_reshape.sub(tf.scalar(127.5));
+        const tfft = tfff.div(tf.scalar(127.5));
+        const tff = tf.image.resizeBilinear(tfft, [224, 224], !0);
+        const result = m.predict(tff);
+        const result2 = await result.dataSync()
+        const answer = tf.softmax(result2);
+        const answer2 = await answer.data()
+        const x = Date.now() - d;
+        tf.dispose([userInput, userInput_reshape, tfff, tfft, tff, result, result2, answer, answer2]);
+        return x;
+    }
+    // var all_i = [];
+    async function start(backend, i) {
+        await tf.ready();
+        // const model = await tf.loadGraphModel('https://storage.googleapis.com/tfjs-models/savedmodel/mobilenet_v2_1.0_224/model.json');
+        // const model = await tf.loadGraphModel('https://storage.googleapis.com/tfjs-models/savedmodel/ssdlite_mobilenet_v2/model.json');
+        // const model = await tf.loadGraphModel('https://storage.googleapis.com/tfhub-tfjs-modules/google/imagenet/mobilenet_v1_100_224/classification/1/model.json');
+        const model = await tf.loadGraphModel("./models/imagenet_mobilenet_v1_100_224_classification", { fromTFHub: true })
+
+        // const model = await tf.loadLayersModel(modelUrl);
+
+        // Warmup the model before using real data.
+        // const inputShape = [1, 224, 224, 3];
+        // console.log(tf.zeros(inputShape))
+        // const warmupResult = model.predict(tf.zeros(inputShape, dtype = "int32"));
+        // const warmupResult = model.predict(tf.zeros(inputShape, dtype = "float32")).dataSync();
+        // console.log(warmupResult);
+        // const warmupResult = await model.executeAsync(tf.zeros(inputShape, dtype = "int32"));
+
+        // const x = await run(model);
+        // console.log(`warmup: ${x}`);
+        // let d = Date.now();
+        // const userInput = tf.browser.fromPixels(document.getElementById('img')).reshape([1, 1333, 2000, 3]);
+        // const tfff = userInput.toFloat().sub(tf.scalar(127.5)).div(tf.scalar(127.5));
+        // const tff = tf.image.resizeBilinear(tfff, [224, 224], !0);
+
+        // const warmupResult2 = model.predict(tff).dataSync();
+        // const answer = await tf.softmax(warmupResult2).data();
+        // console.log(`warmup: ${Date.now() - d}`);
+        // userInput.dispose();
+        // tfff.dispose();
+        // tff.dispose();
+        // warmupResult2.dispose();
+        // answer.dispose();
+
+        // let i = 10;
+        // console.log(tf.getBackend());
+        // while (i--) {
+        //     const x = await run(model);
+        //     console.log(`${i}: ${x}`);
+        //     all_i.push(x);
+        //     // warmupResult2.dispose();
+        //     // answer.dispose();
+        // }
+        // console.log(all_i);
+        // return all_i;
+
+        i++;
+        var all_i2 = [];
+        // tf.wasm.setWasmPaths('wasm://wasm/');
+        tf.setBackend(backend);
+        await tf.ready();
+        // console.log(tf.getBackend());
+        while (i--) {
+            const x = await run(model);
+            // console.log(`${i}: ${x}`);
+            all_i2.push(x);
+            // warmupResult2.dispose();
+            // answer.dispose();
+        }
+        // console.log(all_i2);
+        return all_i2.slice(1);
+
+        // i = 100;
+        // let all_i3 = [];
+        // await tf.setBackend('cpu');
+        // while (i--) {
+        //     const x = await run(model);
+        //     console.log(`${i}: ${x}`);
+        //     all_i3.push(x);
+        // }
+        // console.log(all_i3);
+
+
+        // const warmupResult = await model.executeAsync(tff);
+        // warmupResult.print();
+        // console.log(await warmupResult[0]);
+        // warmupResult.dataSync();
+        // warmupResult.dispose();
+
+        // The second predict() will be much faster
+        // const result = model.predict(document.getElementById('img'));
+    }
+    // start("webgl");
+</script>
+
+<!-- Load TensorFlow.js. This is required to use MobileNet. -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.1"> </script> -->
+<!-- Load the MobileNet model. -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@latest"> </script> -->
+
+<!-- Replace this with your image. Make sure CORS settings allow reading the image! -->
+
+
+<!-- Place your code in the script tag below. You can also use an external .js file -->
+<!-- <script>
+    const img = document.getElementById('img');
+
+    mobilenet.load().then(model => {
+        model.classify(img).then(predictions => {
+            console.log('Predictions: ');
+            console.log(predictions);
+        });
+    });
+    mobilenet.load().then(model => {
+        model.classify(tf.zeros([1, 224, 224, 3], dtype = "float32")).then(predictions => {
+            console.log('Predictions: ');
+            console.log(predictions);
+        });
+    });
+</script> -->
+
+<!-- <script lang="js">
+    async function doTraining(model) {
+        const history =
+            await model.fit(xs, ys,
+                {
+                    epochs: 500,
+                    callbacks: {
+                        onEpochEnd: async (epoch, logs) => {
+                            console.log("Epoch:" + epoch
+                                + " Loss:" + logs.loss);
+                        }
+                    }
+                });
+    }
+    const model = tf.sequential();
+    model.add(tf.layers.dense({ units: 1, inputShape: [1] }));
+    model.compile({
+        loss: 'meanSquaredError',
+        optimizer: 'sgd'
+    });
+    model.summary();
+
+    const xs = tf.tensor2d([-1.0, 0.0, 1.0, 2.0, 3.0, 4.0], [6, 1]);
+    const ys = tf.tensor2d([-3.0, -1.0, 2.0, 3.0, 5.0, 7.0], [6, 1]);
+
+    doTraining(model).then(() => {
+        alert(model.predict(tf.tensor2d([10], [1, 1])));
+    });
+</script> -->
+
+<body>
+    <h1>Hello World</h1>
+</body>
+
+</html>
