@@ -5,6 +5,10 @@ Testing for tfjs wasm
 ### Step 1
 Host testing server
 ```
+python3 -m http.server
+```
+or
+```
 python2 -m SimpleHTTPServer 8000
 ```
 ### Step 2
