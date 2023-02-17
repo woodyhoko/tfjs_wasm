@@ -880,16 +880,14 @@ Read port: 51334
 [GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
 console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\woody\\AppData\\Local\\Temp\\rust_mozprofile0UiZso\\search.json.mozlz4", (void 0)))
 DevTools listening on ws://127.0.0.1:51326/devtools/browser/dc8de7b8-9fe7-4f3c-8370-a52b7f635190
-1676064245663	geckodriver	INFO	Listening on 127.0.0.1:57656
-1676064248722	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-headless" "--remote-debugging-port" "57657" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\woody\\AppData\\Local\\Temp\\rust_mozprofileXdIyaj"
-*** You are running in headless mode.
-1676064249350	Marionette	INFO	Marionette enabled
-Dynamically enable window occlusion 0
-1676064249360	Marionette	INFO	Listening on port 57665
-Read port: 57665
-WebDriver BiDi listening on ws://127.0.0.1:57657
-1676064249504	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
-[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+JavaScript error: , line 0: NotFoundError: Could not move source file(C:\Users\woody\AppData\Local\Temp\rust_mozprofile0UiZso\bookmarkbackups\bookmarks-2023-02-11_11_4nVFKbNNZeMLdD++7kO-hg==.jsonlz4) because it does not exist
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+JavaScript error: , line 0: NotFoundError: Could not move source file(C:\Users\woody\AppData\Local\Temp\rust_mozprofile0UiZso\bookmarkbackups\bookmarks-2023-02-15_11_4nVFKbNNZeMLdD++7kO-hg==.jsonlz4) because it does not exist
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+L failed mapping default framebuffer, no dt
 console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\woody\\AppData\\Local\\Temp\\rust_mozprofileXdIyaj\\search.json.mozlz4", (void 0)))
 DevTools listening on ws://127.0.0.1:57657/devtools/browser/f517b513-cb43-4e29-afd9-619369ec6137
 1676064254192	Marionette	INFO	Stopped listening on port 57665
@@ -1173,18 +1171,16 @@ Read port: 59090
 [GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
 console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\woody\\AppData\\Local\\Temp\\rust_mozprofile6ThJUS\\search.json.mozlz4", (void 0)))
 DevTools listening on ws://127.0.0.1:59082/devtools/browser/00e6df6a-b45f-4532-8be3-51f89a1fcef1
-1676065665089	geckodriver	INFO	Listening on 127.0.0.1:61164
-1676065668132	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "headless" "--enable-javascript" "--use-gl" ... 5" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\woody\\AppData\\Local\\Temp\\rust_mozprofileVAsaEe"
-1676065668590	Marionette	INFO	Marionette enabled
-Dynamically enable window occlusion 0
-1676065668597	Marionette	INFO	Listening on port 61172
-Read port: 61172
-WebDriver BiDi listening on ws://127.0.0.1:61165
-1676065668763	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
-console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\woody\\AppData\\Local\\Temp\\rust_mozprofileVAsaEe\\search.json.mozlz4", (void 0)))
-DevTools listening on ws://127.0.0.1:61165/devtools/browser/c5869e20-417f-4d69-bc51-56d6322887c5
-1676065677440	geckodriver	INFO	Listening on 127.0.0.1:61214
-1676065680489	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "headless" "--enable-javascript" "--use-gl" ... 5" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\woody\\AppData\\Local\\Temp\\rust_mozprofilepo6yFm"
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+JavaScript error: , line 0: NotFoundError: Could not move source file(C:\Users\woody\AppData\Local\Temp\rust_mozprofile6ThJUS\bookmarkbackups\bookmarks-2023-02-11_11_9NDUng61d0ofGpDflimr8Q==.jsonlz4) because it does not exist
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+JavaScript error: , line 0: NotFoundError: Could not move source file(C:\Users\woody\AppData\Local\Temp\rust_mozprofile6ThJUS\bookmarkbackups\bookmarks-2023-02-13_11_9NDUng61d0ofGpDflimr8Q==.jsonlz4) because it does not exist
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+JavaScript error: , line 0: NotFoundError: Could not move source file(C:\Users\woody\AppData\Local\Temp\rust_mozprofile6ThJUS\bookmarkbackups\bookmarks-2023-02-15_11_9NDUng61d0ofGpDflimr8Q==.jsonlz4) because it does not exist
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+JavaScript error: , line 0: NotFoundError: Could not move source file(C:\Users\woody\AppData\Local\Temp\rust_mozprofile6ThJUS\bookmarkbackups\bookmarks-2023-02-16_11_9NDUng61d0ofGpDflimr8Q==.jsonlz4) because it does not exist
+javascript" "--use-gl" ... 5" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\woody\\AppData\\Local\\Temp\\rust_mozprofilepo6yFm"
 1676065680890	Marionette	INFO	Marionette enabled
 Dynamically enable window occlusion 0
 1676065680896	Marionette	INFO	Listening on port 61222
@@ -1546,3 +1542,10 @@ Read port: 50510
 [GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
 console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\woody\\AppData\\Local\\Temp\\rust_mozprofileUBjIFG\\search.json.mozlz4", (void 0)))
 DevTools listening on ws://127.0.0.1:50500/devtools/browser/991fc35c-7384-4910-83f9-746aa2846713
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+JavaScript error: , line 0: NotFoundError: Could not move source file(C:\Users\woody\AppData\Local\Temp\rust_mozprofileUBjIFG\bookmarkbackups\bookmarks-2023-02-13_11_4J-onj9cAp4EdLGzyyGHCQ==.jsonlz4) because it does not exist
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+JavaScript error: , line 0: NotFoundError: Could not move source file(C:\Users\woody\AppData\Local\Temp\rust_mozprofileUBjIFG\bookmarkbackups\bookmarks-2023-02-16_11_4J-onj9cAp4EdLGzyyGHCQ==.jsonlz4) because it does not exist
