@@ -1,13 +1,14 @@
-<html>
-
-<head></head>
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
-<!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-wasm"></script> -->
+<!-- Make sure your page supports utf-8 characterset. -->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- Load TensorFlow.js. This is required to use the qna model. -->
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"> </script>
+<!-- Load the qna model. -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/qna"> </script> -->
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-wasm/dist/tf-backend-wasm.js"></script>
-<!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-webgl/dist/tf-backend-webgl.js"></script> -->
-<!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.1">
-</script> -->
-<img id="img" src="test.jpg" style="display:none"></img>
+<!-- <script>var exports = {};</script> -->
+<!-- <script src="
+https://cdn.jsdelivr.net/npm/bert-tokenizer@latest/dist/index.min.js
+"></script> -->
 
 <body>
     <p id="passage" style="display:none;">
@@ -28,6 +29,7 @@
         became the cornerstone of the polyphase system which that company would eventually market.
     </p>
 </body>
+<!-- Place your code in the script tag below. You can also use an external .js file -->
 <script>
     /**
     * @license
@@ -545,10 +547,10 @@
                                     answers.push(this.getBestAnswers(logits[0][i], logits[1][i], features[i].origTokens, features[i].tokenToOrigMap, context, i));
                                 }
                                 // console.log(Date.now() - d);
+                                console.log(answers.reduce(function (flatten, array) { return flatten.concat(array); }, [])
+                                    .sort(function (logitA, logitB) { return logitB.score - logitA.score; })
+                                    .slice(0, PREDICT_ANSWER_NUM));
                                 return [2, x];
-                            // console.log(answers.reduce(function (flatten, array) { return flatten.concat(array); }, [])
-                            //     .sort(function (logitA, logitB) { return logitB.score - logitA.score; })
-                            //     .slice(0, PREDICT_ANSWER_NUM));
                             // return [2 /*return*/, answers.reduce(function (flatten, array) { return flatten.concat(array); }, [])
                             //     .sort(function (logitA, logitB) { return logitB.score - logitA.score; })
                             //     .slice(0, PREDICT_ANSWER_NUM)];
@@ -664,87 +666,32 @@
     })));
 </script>
 <script>
-    async function run(m) {
-        const d = Date.now();
-        const userInput = tf.browser.fromPixels(document.getElementById('img'));
-        const userInput_reshape = userInput.reshape([1, 1333, 2000, 3]);
-        const tfff = userInput_reshape.sub(tf.scalar(127.5));
-        const tfft = tfff.div(tf.scalar(127.5));
-        const tff = tf.image.resizeBilinear(tfft, [224, 224], !0);
-        const result = m.predict(tff);
-        const result2 = await result.dataSync();
-        const answer = tf.softmax(result2);
-        const answer2 = await answer.data();
-        const x = Date.now() - d;
-        tf.dispose([userInput, userInput_reshape, tfff, tfft, tff, result, result2, answer, answer2]);
-        return x;
-    }
-    async function run2(m) {
+    // Notice there is no 'import' statement. 'qna' and 'tf' is
+    // available on the index-page because of the script tag above.
+
+    // Load the model.
+    run = async (model) => {
         const answer = await model.findAnswers("What is Tesla's best invention?", document.getElementById('passage').innerText);
         return answer;
     }
-    // var all_i = [];
-    async function start(backend, i, task) {
-        tf.setBackend(backend);
+
+    start = async (backend, i) => {
+        tf.setBackend('wasm');
         await tf.ready();
-        // const model = await tf.loadGraphModel('https://storage.googleapis.com/tfjs-models/savedmodel/mobilenet_v2_1.0_224/model.json');
-        // const model = await tf.loadGraphModel('https://storage.googleapis.com/tfjs-models/savedmodel/ssdlite_mobilenet_v2/model.json');
-        // const model = await tf.loadGraphModel('https://storage.googleapis.com/tfhub-tfjs-modules/google/imagenet/mobilenet_v1_100_224/classification/1/model.json');
-        let model;
-        if (task == "vision")
-            model = await tf.loadGraphModel("./models/imagenet_mobilenet_v1_100_224_classification", { fromTFHub: true });
-        else if (task == "nlp")
-            model = await qna.load();
-        // const model = await tf.loadLayersModel(modelUrl);
-
-        // Warmup the model before using real data.
-        // const inputShape = [1, 224, 224, 3];
-        // console.log(tf.zeros(inputShape))
-        // const warmupResult = model.predict(tf.zeros(inputShape, dtype = "int32"));
-        // const warmupResult = model.predict(tf.zeros(inputShape, dtype = "float32")).dataSync();
-        // console.log(warmupResult);
-        // const warmupResult = await model.executeAsync(tf.zeros(inputShape, dtype = "int32"));
-
-        // const x = await run(model);
-        // console.log(`warmup: ${x}`);
-        // let d = Date.now();
-        // const userInput = tf.browser.fromPixels(document.getElementById('img')).reshape([1, 1333, 2000, 3]);
-        // const tfff = userInput.toFloat().sub(tf.scalar(127.5)).div(tf.scalar(127.5));
-        // const tff = tf.image.resizeBilinear(tfff, [224, 224], !0);
-
-        // const warmupResult2 = model.predict(tff).dataSync();
-        // const answer = await tf.softmax(warmupResult2).data();
-        // console.log(`warmup: ${Date.now() - d}`);
-        // userInput.dispose();
-        // tfff.dispose();
-        // tff.dispose();
-        // warmupResult2.dispose();
-        // answer.dispose();
-
-        // let i = 10;
-        // console.log(tf.getBackend());
-        // while (i--) {
-        //     const x = await run(model);
-        //     console.log(`${i}: ${x}`);
-        //     all_i.push(x);
-        //     // warmupResult2.dispose();
-        //     // answer.dispose();
-        // }
-        // console.log(all_i);
-        // return all_i;
-
+        const model = await qna.load();
+        // qna.load().then(model => {
+        //     // Find the answers
+        // const answer = await model.findAnswers("What is Tesla's best invention?", document.getElementById('passage').innerText);
+        // console.log('Answers: ', answer);
+        // });
         i++;
         var all_i2 = [];
         // tf.wasm.setWasmPaths('wasm://wasm/');
+        // tf.setBackend(backend);
+        // await tf.ready();
         // console.log(tf.getBackend());
         while (i--) {
-            let x;
-            switch (task) {
-                case 'vision':
-                    x = await run(model);
-                case 'nlp':
-                    x = await run2(model);
-            }
+            const x = await run(model);
             // console.log(`${i}: ${x}`);
             all_i2.push(x);
             // warmupResult2.dispose();
@@ -753,87 +700,221 @@
         // console.log(all_i2);
         return all_i2.slice(1);
 
-        // i = 100;
-        // let all_i3 = [];
-        // await tf.setBackend('cpu');
-        // while (i--) {
-        //     const x = await run(model);
-        //     console.log(`${i}: ${x}`);
-        //     all_i3.push(x);
-        // }
-        // console.log(all_i3);
-
-
-        // const warmupResult = await model.executeAsync(tff);
-        // warmupResult.print();
-        // console.log(await warmupResult[0]);
-        // warmupResult.dataSync();
-        // warmupResult.dispose();
-
-        // The second predict() will be much faster
-        // const result = model.predict(document.getElementById('img'));
     }
-    // start("wasm", 1);
+    // run();
+
 </script>
 
-<!-- Load TensorFlow.js. This is required to use MobileNet. -->
-<!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.1"> </script> -->
-<!-- Load the MobileNet model. -->
-<!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@latest"> </script> -->
-
-<!-- Replace this with your image. Make sure CORS settings allow reading the image! -->
-
-
-<!-- Place your code in the script tag below. You can also use an external .js file -->
 <!-- <script>
-    const img = document.getElementById('img');
-
-    mobilenet.load().then(model => {
-        model.classify(img).then(predictions => {
-            console.log('Predictions: ');
-            console.log(predictions);
-        });
-    });
-    mobilenet.load().then(model => {
-        model.classify(tf.zeros([1, 224, 224, 3], dtype = "float32")).then(predictions => {
-            console.log('Predictions: ');
-            console.log(predictions);
-        });
-    });
-</script> -->
-
-<!-- <script lang="js">
-    async function doTraining(model) {
-        const history =
-            await model.fit(xs, ys,
-                {
-                    epochs: 500,
-                    callbacks: {
-                        onEpochEnd: async (epoch, logs) => {
-                            console.log("Epoch:" + epoch
-                                + " Loss:" + logs.loss);
-                        }
+    var BertTokenizer = /** @class */ (function () {
+        function BertTokenizer() {
+        }
+        /**
+         * Load the vacabulary file and initialize the Trie for lookup.
+         */
+        BertTokenizer.prototype.load = function () {
+            return __awaiter(this, void 0, void 0, function () {
+                var _a, vocabIndex, word;
+                return __generator(this, function (_b) {
+                    switch (_b.label) {
+                        case 0:
+                            _a = this;
+                            return [4 /*yield*/, this.loadVocab()];
+                        case 1:
+                            _a.vocab = _b.sent();
+                            this.trie = new Trie();
+                            // Actual tokens start at 999.
+                            for (vocabIndex = 999; vocabIndex < this.vocab.length; vocabIndex++) {
+                                word = this.vocab[vocabIndex];
+                                this.trie.insert(word, 1, vocabIndex);
+                            }
+                            return [2 /*return*/];
                     }
                 });
+            });
+        };
+        BertTokenizer.prototype.loadVocab = function () {
+            return __awaiter(this, void 0, void 0, function () {
+                return __generator(this, function (_a) {
+                    return [2 /*return*/, tf.util.fetch(VOCAB_URL).then(function (d) { return d.json(); })];
+                });
+            });
+        };
+        BertTokenizer.prototype.processInput = function (text) {
+            var _this = this;
+            var charOriginalIndex = [];
+            var cleanedText = this.cleanText(text, charOriginalIndex);
+            var origTokens = cleanedText.split(' ');
+            var charCount = 0;
+            var tokens = origTokens.map(function (token) {
+                token = token.toLowerCase();
+                var tokens = _this.runSplitOnPunc(token, charCount, charOriginalIndex);
+                charCount += token.length + 1;
+                return tokens;
+            });
+            var flattenTokens = [];
+            for (var index = 0; index < tokens.length; index++) {
+                flattenTokens = flattenTokens.concat(tokens[index]);
+            }
+            return flattenTokens;
+        };
+        /* Performs invalid character removal and whitespace cleanup on text. */
+        BertTokenizer.prototype.cleanText = function (text, charOriginalIndex) {
+            var stringBuilder = [];
+            var originalCharIndex = 0, newCharIndex = 0;
+            for (var _i = 0, text_1 = text; _i < text_1.length; _i++) {
+                var ch = text_1[_i];
+                // Skip the characters that cannot be used.
+                if (isInvalid(ch)) {
+                    originalCharIndex += ch.length;
+                    continue;
+                }
+                if (isWhitespace(ch)) {
+                    if (stringBuilder.length > 0 &&
+                        stringBuilder[stringBuilder.length - 1] !== ' ') {
+                        stringBuilder.push(' ');
+                        charOriginalIndex[newCharIndex] = originalCharIndex;
+                        originalCharIndex += ch.length;
+                    }
+                    else {
+                        originalCharIndex += ch.length;
+                        continue;
+                    }
+                }
+                else {
+                    stringBuilder.push(ch);
+                    charOriginalIndex[newCharIndex] = originalCharIndex;
+                    originalCharIndex += ch.length;
+                }
+                newCharIndex++;
+            }
+            return stringBuilder.join('');
+        };
+        /* Splits punctuation on a piece of text. */
+        BertTokenizer.prototype.runSplitOnPunc = function (text, count, charOriginalIndex) {
+            var tokens = [];
+            var startNewWord = true;
+            for (var _i = 0, text_2 = text; _i < text_2.length; _i++) {
+                var ch = text_2[_i];
+                if (isPunctuation(ch)) {
+                    tokens.push({ text: ch, index: charOriginalIndex[count] });
+                    count += ch.length;
+                    startNewWord = true;
+                }
+                else {
+                    if (startNewWord) {
+                        tokens.push({ text: '', index: charOriginalIndex[count] });
+                        startNewWord = false;
+                    }
+                    tokens[tokens.length - 1].text += ch;
+                    count += ch.length;
+                }
+            }
+            return tokens;
+        };
+        /**
+         * Generate tokens for the given vocalbuary.
+         * @param text text to be tokenized.
+         */
+        BertTokenizer.prototype.tokenize = function (text) {
+            // Source:
+            // https://github.com/google-research/bert/blob/88a817c37f788702a363ff935fd173b6dc6ac0d6/tokenization.py#L311
+            var outputTokens = [];
+            var words = this.processInput(text);
+            words.forEach(function (word) {
+                if (word.text !== CLS_TOKEN && word.text !== SEP_TOKEN) {
+                    word.text = "" + SEPERATOR + word.text.normalize(NFKC_TOKEN);
+                }
+            });
+            for (var i = 0; i < words.length; i++) {
+                var chars = [];
+                for (var _i = 0, _a = words[i].text; _i < _a.length; _i++) {
+                    var symbol = _a[_i];
+                    chars.push(symbol);
+                }
+                var isUnknown = false;
+                var start = 0;
+                var subTokens = [];
+                var charsLength = chars.length;
+                while (start < charsLength) {
+                    var end = charsLength;
+                    var currIndex = void 0;
+                    while (start < end) {
+                        var substr = chars.slice(start, end).join('');
+                        var match = this.trie.find(substr);
+                        if (match != null && match.end != null) {
+                            currIndex = match.getWord()[2];
+                            break;
+                        }
+                        end = end - 1;
+                    }
+                    if (currIndex == null) {
+                        isUnknown = true;
+                        break;
+                    }
+                    subTokens.push(currIndex);
+                    start = end;
+                }
+                if (isUnknown) {
+                    outputTokens.push(UNK_INDEX);
+                }
+                else {
+                    outputTokens = outputTokens.concat(subTokens);
+                }
+            }
+            return outputTokens;
+        };
+        return BertTokenizer;
+    }());
+    function loadTokenizer() {
+        return __awaiter(this, void 0, void 0, function () {
+            var tokenizer;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        tokenizer = new BertTokenizer();
+                        return [4 /*yield*/, tokenizer.load()];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/, tokenizer];
+                }
+            });
+        });
     }
-    const model = tf.sequential();
-    model.add(tf.layers.dense({ units: 1, inputShape: [1] }));
-    model.compile({
-        loss: 'meanSquaredError',
-        optimizer: 'sgd'
-    });
-    model.summary();
-
-    const xs = tf.tensor2d([-1.0, 0.0, 1.0, 2.0, 3.0, 4.0], [6, 1]);
-    const ys = tf.tensor2d([-3.0, -1.0, 2.0, 3.0, 5.0, 7.0], [6, 1]);
-
-    doTraining(model).then(() => {
-        alert(model.predict(tf.tensor2d([10], [1, 1])));
-    });
 </script> -->
 
-<body>
-    <h1>Hello CSCI 699</h1>
-</body>
 
-</html>
+<!-- <script>
+    const MODEL_URL = 'https://tfhub.dev/tensorflow/tfjs-model/mobilebert/1';
+    const INPUT_SIZE = 384;
+    const MAX_ANSWER_LEN = 32;
+    const MAX_QUERY_LEN = 64;
+    const MAX_SEQ_LEN = 384;
+    const PREDICT_ANSWER_NUM = 5;
+    const OUTPUT_OFFSET = 1;
+    const NO_ANSWER_THRESHOLD = 4.3980759382247925;
+    const vocabUrl = 'node_modules/bert-tokenizer/assets/vocab.json'
+    var bertTokenizer;
+    async function load() {
+        model = await tf.loadGraphModel(
+            MODEL_URL, { fromTFHub: true });
+
+        tf.setBackend("wasm");
+        await tf.ready();
+        // warm up the backend
+        const batchSize = 1;
+        const inputIds = tf.ones([batchSize, INPUT_SIZE], 'int32');
+        const segmentIds = tf.ones([1, INPUT_SIZE], 'int32');
+        const inputMask = tf.ones([1, INPUT_SIZE], 'int32');
+        const result = await model.execute({
+            input_ids: inputIds,
+            segment_ids: segmentIds,
+            input_mask: inputMask,
+            global_step: tf.scalar(1, 'int32')
+        });
+        bertTokenizer = new BertTokenizer(vocabUrl, true);
+        console.log(result);
+        // this.tokenizer = await loadTokenizer();
+    }
+    load();
+</script> -->

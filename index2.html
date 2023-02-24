@@ -1,0 +1,116 @@
+<html>
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-wasm/dist/tf-backend-wasm.js"></script>
+    <script src="https://unpkg.com/@tensorflow-models/speech-commands"></script>
+
+    <style type="text/css">
+        .hidden {
+            display: none;
+        }
+
+        .active {
+            background-color: #090;
+        }
+    </style>
+
+    <script type="text/javascript">
+        let recognizer;
+        let words;
+        const wordList = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "yes", "no", "up", "down", "left", "right", "stop", "go"];
+        let modelLoaded = false;
+
+        async function start() {
+            await tf.ready();
+            const model = await tf.loadGraphModel("https://tfhub.dev/google/yamnet/1", { fromTFHub: true })
+            console.log(model);
+        }
+        // const modelLink = "";
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const wrapperElement = document.getElementById('sp-cmd-wrapper');
+            for (let word of wordList) {
+                wrapperElement.innerHTML += `<div class='col-3 col-md-6'><div id='word-${word}' class='badge'>${word}</div></div>`;
+            };
+
+            document.getElementById("audio-switch").addEventListener('change', (event) => {
+                if (event.target.checked) {
+                    if (modelLoaded) {
+                        startListening();
+                    } else {
+                        loadModel();
+                    }
+                } else {
+                    stopListening();
+                }
+            });
+        });
+
+        async function loadModel() {
+            // Show the loading element
+            const loadingElement = document.getElementById('demo-loading');
+            loadingElement.classList.remove('hidden');
+
+            // When calling `create()`, you must provide the type of the audio input.
+            // - BROWSER_FFT uses the browser's native Fourier transform.
+            recognizer = speechCommands.create("BROWSER_FFT");
+            await recognizer.ensureModelLoaded()
+
+            words = recognizer.wordLabels();
+            modelLoaded = true;
+
+            // Hide the loading element
+            loadingElement.classList.add('hidden');
+            startListening();
+        }
+
+        function startListening() {
+            recognizer.listen(({ scores }) => {
+
+                // Everytime the model evaluates a result it will return the scores array
+                // Based on this data we will build a new array with each word and it's corresponding score
+                scores = Array.from(scores).map((s, i) => ({ score: s, word: words[i] }));
+
+                // After that we sort the array by scode descending
+                scores.sort((s1, s2) => s2.score - s1.score);
+
+                // And we highlight the word with the highest score
+                const elementId = `word-${scores[0].word}`;
+                document.getElementById(elementId).classList.add('active');
+
+                // This is just for removing the highlight after 2.5 seconds
+                setTimeout(() => {
+                    document.getElementById(elementId).classList.remove('active');
+                }, 2500);
+            },
+                {
+                    probabilityThreshold: 0.70
+                });
+        }
+
+        function stopListening() {
+            recognizer.stopListening();
+        }
+    </script>
+</head>
+
+<body>
+    <div class="demo">
+        Please enable the microphone checkbox and authorize this site to access the microphone.
+        <br />
+        Once the process finished loading speak one of the word bellow and see the magic happen.
+        <br /><br />
+        <div>
+            <label class="form-switch">
+                <input type="checkbox" id="audio-switch">
+                Microphone
+            </label>
+            <div id="demo-loading" class="hidden">Loading...</div>
+        </div>
+        <div id="sp-cmd-wrapper" class="grid"></div>
+    </div>
+</body>
+
+</html>
