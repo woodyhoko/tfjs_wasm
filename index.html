@@ -680,11 +680,12 @@
         return x;
     }
     async function run2(m) {
-        const answer = await model.findAnswers("What is Tesla's best invention?", document.getElementById('passage').innerText);
+        const answer = await m.findAnswers("What is Tesla's best invention?", document.getElementById('passage').innerText);
         return answer;
     }
     // var all_i = [];
     async function start(backend, i, task) {
+        tf.wasm.setThreadsCount(1);
         tf.setBackend(backend);
         await tf.ready();
         // const model = await tf.loadGraphModel('https://storage.googleapis.com/tfjs-models/savedmodel/mobilenet_v2_1.0_224/model.json');
@@ -739,11 +740,10 @@
         // console.log(tf.getBackend());
         while (i--) {
             let x;
-            switch (task) {
-                case 'vision':
-                    x = await run(model);
-                case 'nlp':
-                    x = await run2(model);
+            if (task == 'vision') {
+                x = await run(model);
+            } else if (task == 'nlp') {
+                x = await run2(model);
             }
             // console.log(`${i}: ${x}`);
             all_i2.push(x);
@@ -773,7 +773,7 @@
         // The second predict() will be much faster
         // const result = model.predict(document.getElementById('img'));
     }
-    // start("wasm", 1);
+    start("wasm", 1, "vision");
 </script>
 
 <!-- Load TensorFlow.js. This is required to use MobileNet. -->
