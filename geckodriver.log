@@ -2228,7 +2228,10 @@ console.warn: SearchSettings: "get: No settings file exists, new profile?" (new 
 DevTools listening on ws://127.0.0.1:52896/devtools/browser/c80d0a8e-5b89-454c-b4d6-52091d1a7a2c
 [GFX1-]: Unrecognized feature ACCELERATED_CANVAS2D
 JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
- command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-headless" "--remote-debugging-port" "52921" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\woody\\AppData\\Local\\Temp\\rust_mozprofileLjQTF9"
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+Exiting due to channel error.
+w-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\woody\\AppData\\Local\\Temp\\rust_mozprofileLjQTF9"
 *** You are running in headless mode.
 1677569705516	Marionette	INFO	Marionette enabled
 Dynamically enable window occlusion 0
@@ -2520,8 +2523,10 @@ Read port: 54451
 console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\woody\\AppData\\Local\\Temp\\rust_mozprofile4Ok4Sk\\search.json.mozlz4", (void 0)))
 DevTools listening on ws://127.0.0.1:54440/devtools/browser/c73af66a-5fb2-4ed6-93fe-324568a92763
 [GFX1-]: Unrecognized feature ACCELERATED_CANVAS2D
-1677572601488	geckodriver	INFO	Listening on 127.0.0.1:51959
-1677572604543	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-headless" "--remote-debugging-port" "51960" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\woody\\AppData\\Local\\Temp\\rust_mozprofilei12Uef"
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+ox.exe" "--marionette" "-headless" "--remote-debugging-port" "51960" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\woody\\AppData\\Local\\Temp\\rust_mozprofilei12Uef"
 *** You are running in headless mode.
 1677572604977	Marionette	INFO	Marionette enabled
 Dynamically enable window occlusion 0
@@ -2831,8 +2836,10 @@ Read port: 53180
 console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\woody\\AppData\\Local\\Temp\\rust_mozprofilewMq6h5\\search.json.mozlz4", (void 0)))
 DevTools listening on ws://127.0.0.1:53173/devtools/browser/bd3b767a-f559-41cb-afb1-f46b43224c91
 [GFX1-]: Unrecognized feature ACCELERATED_CANVAS2D
-1:53199
-1677572894673	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-headless" "--remote-debugging-port" "53200" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\woody\\AppData\\Local\\Temp\\rust_mozprofilebq3xfO"
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+ng-port" "53200" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\woody\\AppData\\Local\\Temp\\rust_mozprofilebq3xfO"
 *** You are running in headless mode.
 1677572895050	Marionette	INFO	Marionette enabled
 Dynamically enable window occlusion 0
@@ -3124,8 +3131,9 @@ Read port: 54723
 console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\woody\\AppData\\Local\\Temp\\rust_mozprofileVNnf2q\\search.json.mozlz4", (void 0)))
 DevTools listening on ws://127.0.0.1:54716/devtools/browser/4da0d12f-9002-4884-a70c-fa584be8b04e
 [GFX1-]: Unrecognized feature ACCELERATED_CANVAS2D
-1677600017347	geckodriver	INFO	Listening on 127.0.0.1:54049
-1677600020412	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-headless" "--remote-debugging-port" "54050" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\woody\\AppData\\Local\\Temp\\rust_mozprofileLVa4Rq"
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+ command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-headless" "--remote-debugging-port" "54050" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\woody\\AppData\\Local\\Temp\\rust_mozprofileLVa4Rq"
 *** You are running in headless mode.
 1677600020772	Marionette	INFO	Marionette enabled
 Dynamically enable window occlusion 0
@@ -3417,8 +3425,9 @@ Read port: 55733
 console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\woody\\AppData\\Local\\Temp\\rust_mozprofileCCdxqN\\search.json.mozlz4", (void 0)))
 DevTools listening on ws://127.0.0.1:55726/devtools/browser/2acb19f7-eaa4-43dc-8e9e-fc3bb05b20c7
 [GFX1-]: Unrecognized feature ACCELERATED_CANVAS2D
-1:55752
-1677602579927	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-headless" "--remote-debugging-port" "55753" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\woody\\AppData\\Local\\Temp\\rust_mozprofileXt4BgR"
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+ox.exe" "--marionette" "-headless" "--remote-debugging-port" "55753" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\woody\\AppData\\Local\\Temp\\rust_mozprofileXt4BgR"
 *** You are running in headless mode.
 1677602580303	Marionette	INFO	Marionette enabled
 Dynamically enable window occlusion 0
@@ -3730,3 +3739,6 @@ WebDriver BiDi listening on ws://127.0.0.1:50113
 console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\woody\\AppData\\Local\\Temp\\rust_mozprofileKNS5LZ\\search.json.mozlz4", (void 0)))
 DevTools listening on ws://127.0.0.1:50113/devtools/browser/a4e42bc2-942b-4c7a-ba73-32fb91b79fb3
 [GFX1-]: Unrecognized feature ACCELERATED_CANVAS2D
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+Exiting due to channel error.
