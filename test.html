@@ -1,0 +1,35 @@
+<html>
+
+<head></head>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.1.0"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-wasm"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-wasm/dist/tf-backend-wasm.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-cpu/dist/tf-backend-cpu.js"></script>
+<script>
+    run = async (a, b) => {
+        let ttt = [];
+        for (let i = 0; i++ < 1;) {
+            const d = Date.now();
+            tf.add(a, b).dataSync();
+            ttt.push(Date.now() - d);
+        }
+        return ttt;
+    }
+    start = async () => {
+        a = Array.from({ length: 10000000 }, () => Math.floor(Math.random() * 10000000));
+        b = Array.from({ length: 10000000 }, () => Math.floor(Math.random() * 10000000));
+        for (let i = 0; i++ < 3;) {
+            tf.setBackend("wasm");
+            await tf.ready();
+            var fff = await run(a, b);
+
+
+            tf.setBackend("cpu");
+            await tf.ready();
+            var ttt = await run(a, b);
+
+            console.log(i, fff, ttt);
+        }
+    }
+    start();
+</script>
