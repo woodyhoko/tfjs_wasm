@@ -10414,14 +10414,14 @@
             if (null == this.backendName && this.backend,
             !(null != Xx(e, this.backendName)))
                 throw new Error("Kernel '" + e + "' not registered for backend '" + this.backendName + "'");
-            const tt = Date.now();
+            //const tt = Date.now();
             //console.log(e, t, n);
             const ans = this.runKernelFunc({
                 kernelName: e,
                 inputs: t,
                 attrs: n
             });
-            console.log(Date.now() - tt);
+            //console.log(Date.now() - tt);
             return ans
         }
         ,
