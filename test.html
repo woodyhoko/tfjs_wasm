@@ -7,7 +7,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-cpu/dist/tf-backend-cpu.js"></script>
 <script>
     run = async (a, b, n, op) => {
-        let ttt = { "1": [], "2": [], "mix": [], "ori": [], "sync": [] };
+        let ttt = { "1": [], "2": [], "cache": [], "ori": [], "sync_cache": [], "sync": [] };
         const ze = tf.tensor(0);
         const on = tf.tensor(1);
         for (let i = 0; i++ < n;) {
@@ -38,23 +38,214 @@
                 d = Date.now();
                 const g = tf.add(e, f);
                 // console.log(Date.now() - d);
-                ttt["mix"].push(Date.now() - d);
+                ttt["cache"].push(Date.now() - d);
 
 
                 d = Date.now();
-                const ans = await g.dataSync();
+                const ans = await gg.dataSync();
                 // console.log(Date.now() - d);
                 //tf.add(a, b).dataSync();
                 ttt["sync"].push(Date.now() - d);
+
+                d = Date.now();
+                const ans2 = await g.dataSync();
+                // console.log(Date.now() - d);
+                //tf.add(a, b).dataSync();
+                ttt["sync_cache"].push(Date.now() - d);
                 tf.dispose(e);
                 tf.dispose(f);
                 tf.dispose(g);
                 tf.dispose(gg);
             }
+            if (op == "mul") {
+                let d = Date.now();
+                const e = tf.mul(a, on);
+                // console.log(Date.now() - d);
+                ttt["1"].push(Date.now() - d);
+
+                // d = Date.now();
+                // await e.dataSync();
+                // console.log(Date.now() - d);
+
+                d = Date.now();
+                const f = tf.mul(b, on);
+                // console.log(Date.now() - d);
+                ttt["2"].push(Date.now() - d);
+
+                // d = Date.now();
+                // await f.dataSync();
+                // console.log(Date.now() - d);
+
+                d = Date.now();
+                const gg = tf.mul(a, b);
+                // console.log(Date.now() - d);
+                ttt["ori"].push(Date.now() - d);
+
+                d = Date.now();
+                const g = tf.mul(e, f);
+                // console.log(Date.now() - d);
+                ttt["cache"].push(Date.now() - d);
+
+
+                d = Date.now();
+                const ans = await gg.dataSync();
+                // console.log(Date.now() - d);
+                //tf.add(a, b).dataSync();
+                ttt["sync"].push(Date.now() - d);
+
+                d = Date.now();
+                const ans2 = await g.dataSync();
+                // console.log(Date.now() - d);
+                //tf.add(a, b).dataSync();
+                ttt["sync_cache"].push(Date.now() - d);
+                tf.dispose(e);
+                tf.dispose(f);
+                tf.dispose(g);
+                tf.dispose(gg);
+            }
+            if (op == "sub") {
+                let d = Date.now();
+                const e = tf.sub(a, ze);
+                // console.log(Date.now() - d);
+                ttt["1"].push(Date.now() - d);
+
+                // d = Date.now();
+                // await e.dataSync();
+                // console.log(Date.now() - d);
+
+                d = Date.now();
+                const f = tf.sub(b, ze);
+                // console.log(Date.now() - d);
+                ttt["2"].push(Date.now() - d);
+
+                // d = Date.now();
+                // await f.dataSync();
+                // console.log(Date.now() - d);
+
+                d = Date.now();
+                const gg = tf.sub(a, b);
+                // console.log(Date.now() - d);
+                ttt["ori"].push(Date.now() - d);
+
+                d = Date.now();
+                const g = tf.sub(e, f);
+                // console.log(Date.now() - d);
+                ttt["cache"].push(Date.now() - d);
+
+
+                d = Date.now();
+                const ans = await gg.dataSync();
+                // console.log(Date.now() - d);
+                //tf.add(a, b).dataSync();
+                ttt["sync"].push(Date.now() - d);
+
+                d = Date.now();
+                const ans2 = await g.dataSync();
+                // console.log(Date.now() - d);
+                //tf.add(a, b).dataSync();
+                ttt["sync_cache"].push(Date.now() - d);
+                tf.dispose(e);
+                tf.dispose(f);
+                tf.dispose(g);
+                tf.dispose(gg);
+            }
+            if (op == "div") {
+                let d = Date.now();
+                const e = tf.div(a, on);
+                // console.log(Date.now() - d);
+                ttt["1"].push(Date.now() - d);
+
+                // d = Date.now();
+                // await e.dataSync();
+                // console.log(Date.now() - d);
+
+                d = Date.now();
+                const f = tf.div(b, on);
+                // console.log(Date.now() - d);
+                ttt["2"].push(Date.now() - d);
+
+                // d = Date.now();
+                // await f.dataSync();
+                // console.log(Date.now() - d);
+
+                d = Date.now();
+                const gg = tf.div(a, b);
+                // console.log(Date.now() - d);
+                ttt["ori"].push(Date.now() - d);
+
+                d = Date.now();
+                const g = tf.div(e, f);
+                // console.log(Date.now() - d);
+                ttt["cache"].push(Date.now() - d);
+
+
+                d = Date.now();
+                const ans = await gg.dataSync();
+                // console.log(Date.now() - d);
+                //tf.add(a, b).dataSync();
+                ttt["sync"].push(Date.now() - d);
+
+                d = Date.now();
+                const ans2 = await g.dataSync();
+                // console.log(Date.now() - d);
+                //tf.add(a, b).dataSync();
+                ttt["sync_cache"].push(Date.now() - d);
+                tf.dispose(e);
+                tf.dispose(f);
+                tf.dispose(g);
+                tf.dispose(gg);
+            }
+            if (op == "dot") {
+                // let d = Date.now();
+                // const e = tf.dot(a, on);
+                // // console.log(Date.now() - d);
+                // ttt["1"].push(Date.now() - d);
+
+                // d = Date.now();
+                // await e.dataSync();
+                // console.log(Date.now() - d);
+
+                // d = Date.now();
+                // const f = tf.dot(b, on);
+                // // console.log(Date.now() - d);
+                // ttt["2"].push(Date.now() - d);
+
+                // d = Date.now();
+                // await f.dataSync();
+                // console.log(Date.now() - d);
+
+                d = Date.now();
+                const gg = tf.dot(a, b);
+                // console.log(Date.now() - d);
+                ttt["ori"].push(Date.now() - d);
+
+                // d = Date.now();
+                // const g = tf.dot(e, f);
+                // // console.log(Date.now() - d);
+                // ttt["cache"].push(Date.now() - d);
+
+
+                d = Date.now();
+                const ans = await gg.dataSync();
+                // console.log(Date.now() - d);
+                //tf.add(a, b).dataSync();
+                ttt["sync"].push(Date.now() - d);
+
+                // d = Date.now();
+                // const ans2 = await g.dataSync();
+                // // console.log(Date.now() - d);
+                // //tf.add(a, b).dataSync();
+                // ttt["sync_cache"].push(Date.now() - d);
+                // tf.dispose(e);
+                // tf.dispose(f);
+                // tf.dispose(g);
+                tf.dispose(gg);
+            }
+
         }
         return ttt;
     }
-    start = async (n = 10, l = 10000000, backend = "wasm") => {
+    start = async (n = 10, l = 10000000, backend = "wasm", op = "add") => {
         await tf.ready();
         // a = (Array.from({ length: 10000000 }, () => Math.floor(Math.random() * 10000000)));
         // b = (Array.from({ length: 10000000 }, () => Math.floor(Math.random() * 10000000)));
@@ -68,7 +259,7 @@
         await tf.ready();
         // for (let i = 0; i++ < 10;) {
         // var fff = ;
-        return await run(a, b, n);
+        return await run(a, b, n, op);
         // console.log(fff);
         // }
 
@@ -81,8 +272,9 @@
         // var ttt = await run(a, b);
         // console.log(ttt);
     }
+    // start(100, 10000000, "cpu", "dot");
 
-    // return resp;    
+    // return resp;
     // }
     // start();
 </script>
