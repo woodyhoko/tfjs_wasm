@@ -6,57 +6,60 @@
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-wasm/dist/tf-backend-wasm.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-cpu/dist/tf-backend-cpu.js"></script>
 <script>
-    run = async (a, b, n) => {
+    run = async (a, b, n, op) => {
         let ttt = { "1": [], "2": [], "mix": [], "ori": [], "sync": [] };
-        const zz = tf.tensor(1);
+        const ze = tf.tensor(0);
+        const on = tf.tensor(1);
         for (let i = 0; i++ < n;) {
-            let d = Date.now();
-            const e = tf.add(a, zz);
-            // console.log(Date.now() - d);
-            ttt["1"].push(Date.now() - d);
+            if (op == "add") {
+                let d = Date.now();
+                const e = tf.add(a, ze);
+                // console.log(Date.now() - d);
+                ttt["1"].push(Date.now() - d);
 
-            // d = Date.now();
-            // await e.dataSync();
-            // console.log(Date.now() - d);
+                // d = Date.now();
+                // await e.dataSync();
+                // console.log(Date.now() - d);
 
-            d = Date.now();
-            const f = tf.add(b, zz);
-            // console.log(Date.now() - d);
-            ttt["2"].push(Date.now() - d);
+                d = Date.now();
+                const f = tf.add(b, ze);
+                // console.log(Date.now() - d);
+                ttt["2"].push(Date.now() - d);
 
-            // d = Date.now();
-            // await f.dataSync();
-            // console.log(Date.now() - d);
+                // d = Date.now();
+                // await f.dataSync();
+                // console.log(Date.now() - d);
 
-            d = Date.now();
-            const gg = tf.add(a, b);
-            // console.log(Date.now() - d);
-            ttt["ori"].push(Date.now() - d);
+                d = Date.now();
+                const gg = tf.add(a, b);
+                // console.log(Date.now() - d);
+                ttt["ori"].push(Date.now() - d);
 
-            d = Date.now();
-            const g = tf.add(e, f);
-            // console.log(Date.now() - d);
-            ttt["mix"].push(Date.now() - d);
+                d = Date.now();
+                const g = tf.add(e, f);
+                // console.log(Date.now() - d);
+                ttt["mix"].push(Date.now() - d);
 
 
-            d = Date.now();
-            const ans = await g.dataSync();
-            // console.log(Date.now() - d);
-            //tf.add(a, b).dataSync();
-            ttt["sync"].push(Date.now() - d);
-            tf.dispose(e);
-            tf.dispose(f);
-            tf.dispose(g);
-            tf.dispose(gg);
+                d = Date.now();
+                const ans = await g.dataSync();
+                // console.log(Date.now() - d);
+                //tf.add(a, b).dataSync();
+                ttt["sync"].push(Date.now() - d);
+                tf.dispose(e);
+                tf.dispose(f);
+                tf.dispose(g);
+                tf.dispose(gg);
+            }
         }
         return ttt;
     }
-    start = async (n = 10, backend = "wasm") => {
+    start = async (n = 10, l = 10000000, backend = "wasm") => {
         await tf.ready();
         // a = (Array.from({ length: 10000000 }, () => Math.floor(Math.random() * 10000000)));
         // b = (Array.from({ length: 10000000 }, () => Math.floor(Math.random() * 10000000)));
-        a = tf.tensor(Array.from({ length: 10000000 }, () => Math.floor(Math.random() * 10000000)));
-        b = tf.tensor(Array.from({ length: 10000000 }, () => Math.floor(Math.random() * 10000000)));
+        a = tf.tensor(Array.from({ length: l }, () => Math.floor(Math.random() * l)));
+        b = tf.tensor(Array.from({ length: l }, () => Math.floor(Math.random() * l)));
         //c = tf.tensor(Array.from({ length: 10000000 }, () => Math.floor(Math.random() * 10000000)));
 
         // let resp = {};
