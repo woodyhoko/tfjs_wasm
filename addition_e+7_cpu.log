@@ -1,0 +1,1716 @@
+DevTools failed to load source map: Could not load content for file:///D:/GitHub/tfjs_wasm/tf.min.js.map: System error: net::ERR_FILE_NOT_FOUND
+ cpu backend was already registered. Reusing existing backend factory.
+Hx @ tfjs@4.1.0:8700
+t.registerBackend @ tfjs@4.1.0:10172
+wI @ tfjs@4.1.0:13451
+(anonymous) @ tf-backend-cpu.js:3564
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+ The kernel '_FusedMatMul' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ tf-backend-cpu.js:10467
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+ The kernel 'Abs' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ tf-backend-cpu.js:10467
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+ The kernel 'Acos' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ tf-backend-cpu.js:10467
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+ The kernel 'Acosh' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ tf-backend-cpu.js:10467
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+ The kernel 'Add' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ tf-backend-cpu.js:10467
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+ The kernel 'AddN' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ tf-backend-cpu.js:10467
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+ The kernel 'All' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ tf-backend-cpu.js:10467
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+ The kernel 'Any' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ tf-backend-cpu.js:10467
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+ The kernel 'ArgMax' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ tf-backend-cpu.js:10467
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+ The kernel 'ArgMin' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ tf-backend-cpu.js:10467
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+ The kernel 'Asin' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ tf-backend-cpu.js:10467
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+ The kernel 'Asinh' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ tf-backend-cpu.js:10467
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+ The kernel 'Atan' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ tf-backend-cpu.js:10467
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+ The kernel 'Atan2' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ tf-backend-cpu.js:10467
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+ The kernel 'Atanh' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ tf-backend-cpu.js:10467
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+ The kernel 'AvgPool' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ tf-backend-cpu.js:10467
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+ The kernel 'AvgPool3D' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ tf-backend-cpu.js:10467
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+ The kernel 'AvgPool3DGrad' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ tf-backend-cpu.js:10467
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+ The kernel 'AvgPoolGrad' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ tf-backend-cpu.js:10467
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+ The kernel 'BatchMatMul' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ tf-backend-cpu.js:10467
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+ The kernel 'FusedBatchNorm' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ tf-backend-cpu.js:10467
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+ The kernel 'BatchToSpaceND' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ tf-backend-cpu.js:10467
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+ The kernel 'Bincount' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ tf-backend-cpu.js:10467
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+ The kernel 'BroadcastArgs' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ tf-backend-cpu.js:10467
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+ The kernel 'Cast' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ tf-backend-cpu.js:10467
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+ The kernel 'Ceil' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ tf-backend-cpu.js:10467
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+ The kernel 'ClipByValue' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ tf-backend-cpu.js:10467
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+ The kernel 'Complex' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ tf-backend-cpu.js:10467
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+ The kernel 'ComplexAbs' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ tf-backend-cpu.js:10467
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+ The kernel 'Concat' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ tf-backend-cpu.js:10467
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+ The kernel 'Conv2D' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ tf-backend-cpu.js:10467
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+ The kernel 'Conv2DBackpropFilter' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ tf-backend-cpu.js:10467
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+ The kernel 'Conv2DBackpropInput' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ tf-backend-cpu.js:10467
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+ The kernel 'Conv3D' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ tf-backend-cpu.js:10467
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+ The kernel 'Conv3DBackpropFilterV2' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ tf-backend-cpu.js:10467
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+ The kernel 'Conv3DBackpropInputV2' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ tf-backend-cpu.js:10467
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+ The kernel 'Cos' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ tf-backend-cpu.js:10467
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+ The kernel 'Cosh' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ tf-backend-cpu.js:10467
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+ The kernel 'CropAndResize' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ tf-backend-cpu.js:10467
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+ The kernel 'Cumprod' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ tf-backend-cpu.js:10467
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+ The kernel 'Cumsum' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ tf-backend-cpu.js:10467
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+ The kernel 'DenseBincount' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ tf-backend-cpu.js:10467
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+ The kernel 'DepthToSpace' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ tf-backend-cpu.js:10467
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+ The kernel 'DepthwiseConv2dNative' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ tf-backend-cpu.js:10467
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+ The kernel 'DepthwiseConv2dNativeBackpropFilter' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ tf-backend-cpu.js:10467
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+ The kernel 'DepthwiseConv2dNativeBackpropInput' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ tf-backend-cpu.js:10467
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+ The kernel 'Diag' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ tf-backend-cpu.js:10467
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+ The kernel 'Dilation2D' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ tf-backend-cpu.js:10467
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+ The kernel 'Dilation2DBackpropFilter' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ tf-backend-cpu.js:10467
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+ The kernel 'Dilation2DBackpropInput' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ tf-backend-cpu.js:10467
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+ The kernel 'Einsum' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ tf-backend-cpu.js:10467
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+ The kernel 'Elu' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ tf-backend-cpu.js:10467
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'EluGrad' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'Equal' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'Erf' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'Exp' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'ExpandDims' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'Expm1' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'FFT' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'Fill' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'FlipLeftRight' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'Floor' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'FloorDiv' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'FusedConv2D' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'FusedDepthwiseConv2D' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'GatherNd' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'GatherV2' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'Greater' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'GreaterEqual' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'Identity' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'IFFT' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'Imag' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'IsFinite' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'IsInf' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'IsNan' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'LeakyRelu' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'Less' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'LessEqual' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'LinSpace' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'Log' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'Log1p' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'LogicalAnd' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'LogicalNot' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'LogicalOr' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'LRN' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'LRNGrad' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'Max' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'Maximum' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'MaxPool' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'MaxPool3D' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'MaxPool3DGrad' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'MaxPoolGrad' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'MaxPoolWithArgmax' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'Mean' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'Min' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'Minimum' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'MirrorPad' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'Mod' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'Multinomial' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'Multiply' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'Neg' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'NonMaxSuppressionV3' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'NonMaxSuppressionV4' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'NonMaxSuppressionV5' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'NotEqual' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'OneHot' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'OnesLike' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'Pack' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'PadV2' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'Pow' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'Prelu' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'Prod' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'RaggedGather' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'RaggedRange' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'RaggedTensorToTensor' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'Range' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'Real' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'RealDiv' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'Reciprocal' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'Relu' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'Relu6' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'Reshape' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'ResizeBilinear' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'ResizeBilinearGrad' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'ResizeNearestNeighbor' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'ResizeNearestNeighborGrad' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'Reverse' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'RotateWithOffset' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'Round' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'Rsqrt' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'ScatterNd' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'SearchSorted' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'Select' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'Selu' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'Sigmoid' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'Sign' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'Sin' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'Sinh' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'Slice' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'Softmax' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'Softplus' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'SpaceToBatchND' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'SparseFillEmptyRows' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'SparseReshape' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'SparseSegmentMean' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'SparseSegmentSum' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'SparseToDense' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'SplitV' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'Sqrt' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'Square' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'SquaredDifference' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'Step' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'StridedSlice' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'StringNGrams' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'StringSplit' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'StringToHashBucketFast' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'Sub' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'Sum' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'Tan' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'Tanh' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'Tile' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'TopK' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'Transform' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'Transpose' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'Unique' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'Unpack' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'UnsortedSegmentSum' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:8700 The kernel 'ZerosLike' for backend 'cpu' is already registered
+Hx @ tfjs@4.1.0:8700
+Zx @ tfjs@4.1.0:8734
+(anonymous) @ register_all_kernels.ts:364
+(anonymous) @ tf-backend-cpu.js:20
+(anonymous) @ tf-backend-cpu.js:21
+tfjs@4.1.0:10424 72
+test.html:14 305
+tfjs@4.1.0:10424 60
+test.html:17 287
+tfjs@4.1.0:10424 79
+test.html:20 79
+test.html:23 0
+tfjs@4.1.0:10424 75
+test.html:14 331
+tfjs@4.1.0:10424 61
+test.html:17 290
+tfjs@4.1.0:10424 77
+test.html:20 77
+test.html:23 0
+tfjs@4.1.0:10424 82
+test.html:14 314
+tfjs@4.1.0:10424 50
+test.html:17 266
+tfjs@4.1.0:10424 71
+test.html:20 71
+test.html:23 0
+tfjs@4.1.0:10424 49
+test.html:14 257
+tfjs@4.1.0:10424 52
+test.html:17 288
+tfjs@4.1.0:10424 76
+test.html:20 76
+test.html:23 0
+tfjs@4.1.0:10424 51
+test.html:14 282
+tfjs@4.1.0:10424 55
+test.html:17 271
+tfjs@4.1.0:10424 70
+test.html:20 70
+test.html:23 0
+tfjs@4.1.0:10424 51
+test.html:14 269
+tfjs@4.1.0:10424 55
+test.html:17 280
+tfjs@4.1.0:10424 77
+test.html:20 77
+test.html:23 0
+tfjs@4.1.0:10424 52
+test.html:14 272
+tfjs@4.1.0:10424 49
+test.html:17 270
+tfjs@4.1.0:10424 71
+test.html:20 71
+test.html:23 0
+tfjs@4.1.0:10424 49
+test.html:14 272
+tfjs@4.1.0:10424 50
+test.html:17 281
+tfjs@4.1.0:10424 71
+test.html:20 71
+test.html:23 0
+tfjs@4.1.0:10424 52
+test.html:14 276
+tfjs@4.1.0:10424 53
+test.html:17 278
+tfjs@4.1.0:10424 70
+test.html:20 70
+test.html:23 0
+tfjs@4.1.0:10424 50
+test.html:14 274
+tfjs@4.1.0:10424 53
+test.html:17 274
+tfjs@4.1.0:10424 71
+test.html:20 71
+test.html:23 0
+tfjs@4.1.0:10424 55
+test.html:14 276
+tfjs@4.1.0:10424 60
+test.html:17 288
+tfjs@4.1.0:10424 70
+test.html:20 70
+test.html:23 0
+tfjs@4.1.0:10424 50
+test.html:14 268
+tfjs@4.1.0:10424 51
+test.html:17 274
+tfjs@4.1.0:10424 77
+test.html:20 77
+test.html:23 1
+tfjs@4.1.0:10424 52
+test.html:14 280
+tfjs@4.1.0:10424 51
+test.html:17 270
+tfjs@4.1.0:10424 72
+test.html:20 72
+test.html:23 0
+tfjs@4.1.0:10424 49
+test.html:14 269
+tfjs@4.1.0:10424 50
+test.html:17 273
+tfjs@4.1.0:10424 76
+test.html:20 76
+test.html:23 0
+tfjs@4.1.0:10424 52
+test.html:14 270
+tfjs@4.1.0:10424 52
+test.html:17 278
+tfjs@4.1.0:10424 69
+test.html:20 69
+test.html:23 0
+tfjs@4.1.0:10424 51
+test.html:14 280
+tfjs@4.1.0:10424 56
+test.html:17 282
+tfjs@4.1.0:10424 71
+test.html:20 72
+test.html:23 0
+tfjs@4.1.0:10424 49
+test.html:14 268
+tfjs@4.1.0:10424 53
+test.html:17 280
+tfjs@4.1.0:10424 71
+test.html:20 71
+test.html:23 0
+tfjs@4.1.0:10424 55
+test.html:14 277
+tfjs@4.1.0:10424 51
+test.html:17 275
+tfjs@4.1.0:10424 71
+test.html:20 71
+test.html:23 0
+tfjs@4.1.0:10424 50
+test.html:14 274
+tfjs@4.1.0:10424 50
+test.html:17 291
+tfjs@4.1.0:10424 70
+test.html:20 70
+test.html:23 0
+tfjs@4.1.0:10424 55
+test.html:14 274
+tfjs@4.1.0:10424 49
+test.html:17 281
+tfjs@4.1.0:10424 71
+test.html:20 71
+test.html:23 0
+tfjs@4.1.0:10424 52
+test.html:14 280
+tfjs@4.1.0:10424 50
+test.html:17 279
+tfjs@4.1.0:10424 74
+test.html:20 74
+test.html:23 0
+tfjs@4.1.0:10424 49
+test.html:14 269
+tfjs@4.1.0:10424 51
+test.html:17 272
+tfjs@4.1.0:10424 74
+test.html:20 74
+test.html:23 0
+tfjs@4.1.0:10424 51
+test.html:14 270
+tfjs@4.1.0:10424 51
+test.html:17 277
+tfjs@4.1.0:10424 72
+test.html:20 72
+test.html:23 0
+tfjs@4.1.0:10424 50
+test.html:14 270
+tfjs@4.1.0:10424 53
+test.html:17 287
+tfjs@4.1.0:10424 72
+test.html:20 72
+test.html:23 0
+tfjs@4.1.0:10424 50
+test.html:14 280
+tfjs@4.1.0:10424 51
+test.html:17 273
+tfjs@4.1.0:10424 69
+test.html:20 69
+test.html:23 0
+tfjs@4.1.0:10424 52
+test.html:14 281
+tfjs@4.1.0:10424 50
+test.html:17 273
+tfjs@4.1.0:10424 70
+test.html:20 70
+test.html:23 0
+tfjs@4.1.0:10424 53
+test.html:14 278
+tfjs@4.1.0:10424 53
+test.html:17 285
+tfjs@4.1.0:10424 71
+test.html:20 71
+test.html:23 0
+tfjs@4.1.0:10424 49
+test.html:14 269
+tfjs@4.1.0:10424 51
+test.html:17 278
+tfjs@4.1.0:10424 69
+test.html:20 69
+test.html:23 0
+tfjs@4.1.0:10424 53
+test.html:14 287
+tfjs@4.1.0:10424 52
+test.html:17 277
+tfjs@4.1.0:10424 70
+test.html:20 70
+test.html:23 0
+tfjs@4.1.0:10424 50
+test.html:14 271
+tfjs@4.1.0:10424 52
+test.html:17 278
+tfjs@4.1.0:10424 75
+test.html:20 75
+test.html:23 0
+tfjs@4.1.0:10424 49
+test.html:14 275
+tfjs@4.1.0:10424 52
+test.html:17 273
+tfjs@4.1.0:10424 69
+test.html:20 69
+test.html:23 0
+tfjs@4.1.0:10424 52
+test.html:14 277
+tfjs@4.1.0:10424 51
+test.html:17 277
+tfjs@4.1.0:10424 72
+test.html:20 72
+test.html:23 0
+tfjs@4.1.0:10424 51
+test.html:14 276
+tfjs@4.1.0:10424 51
+test.html:17 272
+tfjs@4.1.0:10424 73
+test.html:20 75
+test.html:23 0
+tfjs@4.1.0:10424 49
+test.html:14 276
+tfjs@4.1.0:10424 50
+test.html:17 276
+tfjs@4.1.0:10424 72
+test.html:20 72
+test.html:23 0
+tfjs@4.1.0:10424 50
+test.html:14 269
+tfjs@4.1.0:10424 49
+test.html:17 273
+tfjs@4.1.0:10424 69
+test.html:20 69
+test.html:23 0
+tfjs@4.1.0:10424 49
+test.html:14 272
+tfjs@4.1.0:10424 52
+test.html:17 274
+tfjs@4.1.0:10424 73
+test.html:20 73
+test.html:23 0
+tfjs@4.1.0:10424 53
+test.html:14 280
+tfjs@4.1.0:10424 50
+test.html:17 277
+tfjs@4.1.0:10424 74
+test.html:20 74
+test.html:23 0
+tfjs@4.1.0:10424 52
+test.html:14 278
+tfjs@4.1.0:10424 52
+test.html:17 278
+tfjs@4.1.0:10424 77
+test.html:20 77
+test.html:23 0
+tfjs@4.1.0:10424 50
+test.html:14 273
+tfjs@4.1.0:10424 51
+test.html:17 273
+tfjs@4.1.0:10424 71
+test.html:20 71
+test.html:23 0
+tfjs@4.1.0:10424 49
+test.html:14 273
+tfjs@4.1.0:10424 52
+test.html:17 280
+tfjs@4.1.0:10424 74
+test.html:20 74
+test.html:23 0
+tfjs@4.1.0:10424 50
+test.html:14 273
+tfjs@4.1.0:10424 51
+test.html:17 277
+tfjs@4.1.0:10424 68
+test.html:20 68
+test.html:23 1
+tfjs@4.1.0:10424 53
+test.html:14 287
+tfjs@4.1.0:10424 52
+test.html:17 282
+tfjs@4.1.0:10424 73
+test.html:20 73
+test.html:23 0
+tfjs@4.1.0:10424 51
+test.html:14 275
+tfjs@4.1.0:10424 48
+test.html:17 275
+tfjs@4.1.0:10424 69
+test.html:20 69
+test.html:23 0
+tfjs@4.1.0:10424 51
+test.html:14 271
+tfjs@4.1.0:10424 53
+test.html:17 275
+tfjs@4.1.0:10424 72
+test.html:20 72
+test.html:23 0
+tfjs@4.1.0:10424 53
+test.html:14 282
+tfjs@4.1.0:10424 54
+test.html:17 276
+tfjs@4.1.0:10424 68
+test.html:20 68
+test.html:23 0
+tfjs@4.1.0:10424 50
+test.html:14 269
+tfjs@4.1.0:10424 56
+test.html:17 282
+tfjs@4.1.0:10424 76
+test.html:20 76
+test.html:23 0
+tfjs@4.1.0:10424 57
+test.html:14 269
+tfjs@4.1.0:10424 53
+test.html:17 275
+tfjs@4.1.0:10424 78
+test.html:20 78
+test.html:23 0
+tfjs@4.1.0:10424 51
+test.html:14 272
+tfjs@4.1.0:10424 50
+test.html:17 276
+tfjs@4.1.0:10424 71
+test.html:20 71
+test.html:23 0
+tfjs@4.1.0:10424 50
+test.html:14 274
+tfjs@4.1.0:10424 54
+test.html:17 277
+tfjs@4.1.0:10424 71
+test.html:20 71
+test.html:23 0
+tfjs@4.1.0:10424 54
+test.html:14 280
+tfjs@4.1.0:10424 50
+test.html:17 277
+tfjs@4.1.0:10424 68
+test.html:20 68
+test.html:23 0
+tfjs@4.1.0:10424 53
+test.html:14 273
+tfjs@4.1.0:10424 50
+test.html:17 277
+tfjs@4.1.0:10424 70
+test.html:20 70
+test.html:23 0
+tfjs@4.1.0:10424 50
+test.html:14 271
+tfjs@4.1.0:10424 50
+test.html:17 273
+tfjs@4.1.0:10424 76
+test.html:20 76
+test.html:23 0
+tfjs@4.1.0:10424 51
+test.html:14 269
+tfjs@4.1.0:10424 52
+test.html:17 275
+tfjs@4.1.0:10424 73
+test.html:20 73
+test.html:23 0
+tfjs@4.1.0:10424 50
+test.html:14 282
+tfjs@4.1.0:10424 52
+test.html:17 285
+tfjs@4.1.0:10424 75
+test.html:20 75
+test.html:23 0
+tfjs@4.1.0:10424 50
+test.html:14 271
+tfjs@4.1.0:10424 49
+test.html:17 275
+tfjs@4.1.0:10424 72
+test.html:20 72
+test.html:23 0
+tfjs@4.1.0:10424 50
+test.html:14 270
+tfjs@4.1.0:10424 51
+test.html:17 281
+tfjs@4.1.0:10424 71
+test.html:20 71
+test.html:23 0
+tfjs@4.1.0:10424 55
+test.html:14 289
+tfjs@4.1.0:10424 50
+test.html:17 278
+tfjs@4.1.0:10424 71
+test.html:20 71
+test.html:23 0
+tfjs@4.1.0:10424 51
+test.html:14 269
+tfjs@4.1.0:10424 50
+test.html:17 274
+tfjs@4.1.0:10424 71
+test.html:20 71
+test.html:23 0
+tfjs@4.1.0:10424 52
+test.html:14 274
+tfjs@4.1.0:10424 52
+test.html:17 272
+tfjs@4.1.0:10424 71
+test.html:20 71
+test.html:23 0
+tfjs@4.1.0:10424 50
+test.html:14 273
+tfjs@4.1.0:10424 51
+test.html:17 283
+tfjs@4.1.0:10424 72
+test.html:20 72
+test.html:23 0
+tfjs@4.1.0:10424 53
+test.html:14 278
+tfjs@4.1.0:10424 51
+test.html:17 274
+tfjs@4.1.0:10424 72
+test.html:20 72
+test.html:23 0
+tfjs@4.1.0:10424 50
+test.html:14 272
+tfjs@4.1.0:10424 52
+test.html:17 283
+tfjs@4.1.0:10424 73
+test.html:20 73
+test.html:23 0
+tfjs@4.1.0:10424 50
+test.html:14 267
+tfjs@4.1.0:10424 50
+test.html:17 274
+tfjs@4.1.0:10424 71
+test.html:20 71
+test.html:23 0
+tfjs@4.1.0:10424 50
+test.html:14 271
+tfjs@4.1.0:10424 53
+test.html:17 276
+tfjs@4.1.0:10424 71
+test.html:20 71
+test.html:23 0
+tfjs@4.1.0:10424 51
+test.html:14 280
+tfjs@4.1.0:10424 53
+test.html:17 278
+tfjs@4.1.0:10424 71
+test.html:20 71
+test.html:23 0
+tfjs@4.1.0:10424 53
+test.html:14 279
+tfjs@4.1.0:10424 53
+test.html:17 275
+tfjs@4.1.0:10424 74
+test.html:20 74
+test.html:23 0
+tfjs@4.1.0:10424 50
+test.html:14 275
+tfjs@4.1.0:10424 52
+test.html:17 279
+tfjs@4.1.0:10424 69
+test.html:20 69
+test.html:23 0
+tfjs@4.1.0:10424 50
+test.html:14 272
+tfjs@4.1.0:10424 52
+test.html:17 279
+tfjs@4.1.0:10424 71
+test.html:20 71
+test.html:23 0
+tfjs@4.1.0:10424 57
+test.html:14 281
+tfjs@4.1.0:10424 54
+test.html:17 280
+tfjs@4.1.0:10424 72
+test.html:20 72
+test.html:23 0
+tfjs@4.1.0:10424 51
+test.html:14 278
+tfjs@4.1.0:10424 51
+test.html:17 274
+tfjs@4.1.0:10424 71
+test.html:20 72
+test.html:23 0
+tfjs@4.1.0:10424 49
+test.html:14 274
+tfjs@4.1.0:10424 52
+test.html:17 282
+tfjs@4.1.0:10424 85
+test.html:20 85
+test.html:23 0
+tfjs@4.1.0:10424 52
+test.html:14 282
+tfjs@4.1.0:10424 55
+test.html:17 284
+tfjs@4.1.0:10424 71
+test.html:20 71
+test.html:23 0
+tfjs@4.1.0:10424 52
+test.html:14 277
+tfjs@4.1.0:10424 51
+test.html:17 281
+tfjs@4.1.0:10424 72
+test.html:20 72
+test.html:23 0
+tfjs@4.1.0:10424 50
+test.html:14 279
+tfjs@4.1.0:10424 50
+test.html:17 274
+tfjs@4.1.0:10424 77
+test.html:20 77
+test.html:23 0
+tfjs@4.1.0:10424 53
+test.html:14 270
+tfjs@4.1.0:10424 49
+test.html:17 278
+tfjs@4.1.0:10424 67
+test.html:20 68
+test.html:23 0
+tfjs@4.1.0:10424 50
+test.html:14 273
+tfjs@4.1.0:10424 50
+test.html:17 275
+tfjs@4.1.0:10424 72
+test.html:20 72
+test.html:23 0
+tfjs@4.1.0:10424 51
+test.html:14 281
+tfjs@4.1.0:10424 51
+test.html:17 269
+tfjs@4.1.0:10424 70
+test.html:20 70
+test.html:23 0
+tfjs@4.1.0:10424 50
+test.html:14 273
+tfjs@4.1.0:10424 53
+test.html:17 282
+tfjs@4.1.0:10424 74
+test.html:20 74
+test.html:23 0
+tfjs@4.1.0:10424 51
+test.html:14 269
+tfjs@4.1.0:10424 50
+test.html:17 283
+tfjs@4.1.0:10424 71
+test.html:20 71
+test.html:23 0
+tfjs@4.1.0:10424 54
+test.html:14 281
+tfjs@4.1.0:10424 50
+test.html:17 295
+tfjs@4.1.0:10424 70
+test.html:20 70
+test.html:23 0
+tfjs@4.1.0:10424 50
+test.html:14 278
+tfjs@4.1.0:10424 50
+test.html:17 279
+tfjs@4.1.0:10424 70
+test.html:20 70
+test.html:23 0
+tfjs@4.1.0:10424 51
+test.html:14 273
+tfjs@4.1.0:10424 51
+test.html:17 277
+tfjs@4.1.0:10424 71
+test.html:20 71
+test.html:23 0
+tfjs@4.1.0:10424 49
+test.html:14 270
+tfjs@4.1.0:10424 49
+test.html:17 277
+tfjs@4.1.0:10424 69
+test.html:20 70
+test.html:23 0
+tfjs@4.1.0:10424 50
+test.html:14 276
+tfjs@4.1.0:10424 51
+test.html:17 274
+tfjs@4.1.0:10424 71
+test.html:20 71
+test.html:23 0
+tfjs@4.1.0:10424 55
+test.html:14 280
+tfjs@4.1.0:10424 51
+test.html:17 268
+tfjs@4.1.0:10424 73
+test.html:20 73
+test.html:23 0
+tfjs@4.1.0:10424 51
+test.html:14 278
+tfjs@4.1.0:10424 50
+test.html:17 277
+tfjs@4.1.0:10424 72
+test.html:20 72
+test.html:23 0
+tfjs@4.1.0:10424 52
+test.html:14 272
+tfjs@4.1.0:10424 52
+test.html:17 277
+tfjs@4.1.0:10424 68
+test.html:20 68
+test.html:23 0
+tfjs@4.1.0:10424 53
+test.html:14 292
+tfjs@4.1.0:10424 50
+test.html:17 296
+tfjs@4.1.0:10424 71
+test.html:20 71
+test.html:23 0
+tfjs@4.1.0:10424 51
+test.html:14 276
+tfjs@4.1.0:10424 51
+test.html:17 280
+tfjs@4.1.0:10424 74
+test.html:20 74
+test.html:23 0
+tfjs@4.1.0:10424 51
+test.html:14 275
+tfjs@4.1.0:10424 51
+test.html:17 274
+tfjs@4.1.0:10424 69
+test.html:20 69
+test.html:23 0
+tfjs@4.1.0:10424 51
+test.html:14 275
+tfjs@4.1.0:10424 49
+test.html:17 275
+tfjs@4.1.0:10424 68
+test.html:20 69
+test.html:23 0
+tfjs@4.1.0:10424 49
+test.html:14 267
+tfjs@4.1.0:10424 51
+test.html:17 279
+tfjs@4.1.0:10424 71
+test.html:20 71
+test.html:23 0
+tfjs@4.1.0:10424 49
+test.html:14 279
+tfjs@4.1.0:10424 52
+test.html:17 278
+tfjs@4.1.0:10424 70
+test.html:20 70
+test.html:23 0
+tfjs@4.1.0:10424 49
+test.html:14 272
+tfjs@4.1.0:10424 51
+test.html:17 276
+tfjs@4.1.0:10424 75
+test.html:20 75
+test.html:23 0
+tfjs@4.1.0:10424 51
+test.html:14 268
+tfjs@4.1.0:10424 53
+test.html:17 280
+tfjs@4.1.0:10424 68
+test.html:20 68
+test.html:23 0
+tfjs@4.1.0:10424 50
+test.html:14 271
+tfjs@4.1.0:10424 49
+test.html:17 279
+tfjs@4.1.0:10424 69
+test.html:20 69
+test.html:23 0
+tfjs@4.1.0:10424 53
+test.html:14 278
+tfjs@4.1.0:10424 50
+test.html:17 277
+tfjs@4.1.0:10424 74
+test.html:20 74
+test.html:23 0
+tfjs@4.1.0:10424 52
+test.html:14 278
+tfjs@4.1.0:10424 51
+test.html:17 278
+tfjs@4.1.0:10424 70
+test.html:20 70
+test.html:23 0
+tfjs@4.1.0:10424 50
+test.html:14 278
+tfjs@4.1.0:10424 51
+test.html:17 282
+tfjs@4.1.0:10424 70
+test.html:20 70
+test.html:23 0
+tfjs@4.1.0:10424 50
+test.html:14 269
+tfjs@4.1.0:10424 51
+test.html:17 286
+tfjs@4.1.0:10424 70
+test.html:20 70
+test.html:23 0
