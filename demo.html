@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TF.js WASM Benchmark Visualizer</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#0d1117;color:#e6edf3;font-family:"Segoe UI",system-ui,sans-serif;padding:20px;min-height:100vh}
+  h1{font-size:20px;margin-bottom:4px;color:#a371f7}
+  .sub{color:#8b949e;font-size:13px;margin-bottom:20px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+  @media(max-width:650px){.grid{grid-template-columns:1fr}}
+  .card{background:#161b22;border:1px solid #30363d;border-radius:12px;padding:15px}
+  h2{font-size:12px;color:#8b949e;margin-bottom:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+  canvas{width:100%;display:block}
+  .legend{font-size:11px;color:#8b949e;margin-top:8px;display:flex;flex-wrap:wrap;gap:10px}
+  .leg{display:flex;align-items:center;gap:4px}
+  .sq{width:10px;height:10px;border-radius:2px;flex:0 0 10px}
+  .metric-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
+  .metric{background:#161b22;border:1px solid #30363d;border-radius:10px;padding:12px;text-align:center}
+  .metric .lbl{font-size:11px;color:#8b949e;margin-bottom:3px}
+  .metric .num{font-size:18px;font-weight:700;color:#a371f7}
+  .metric .unit{font-size:10px;color:#8b949e}
+  button{padding:8px 18px;border:none;border-radius:8px;cursor:pointer;background:#a371f7;color:#0d1117;font-weight:700;font-size:13px;margin-bottom:16px;transition:.15s}
+  button:hover{filter:brightness(1.08)}
+  table{width:100%;border-collapse:collapse;font-size:12px}
+  th,td{padding:7px 10px;text-align:left;border-bottom:1px solid #21262d}
+  th{color:#8b949e;font-weight:600}
+  td.win{color:#3fb950;font-weight:700}
+</style>
+</head>
+<body>
+<h1>TF.js — WASM vs. CPU Benchmark</h1>
+<p class="sub">Simulated cross-browser benchmark data visualizing TensorFlow.js WASM, CPU, and WebGL backend performance across tensor sizes.</p>
+
+<div class="metric-row" id="metrics"></div>
+<button id="run">Generate Benchmark Report</button>
+
+<div class="grid">
+  <div class="card">
+    <h2>Throughput — ops/sec by backend</h2>
+    <canvas id="throughput" height="220"></canvas>
+    <div class="legend">
+      <div class="leg"><div class="sq" style="background:#a371f7"></div>WASM+SIMD</div>
+      <div class="leg"><div class="sq" style="background:#58a6ff"></div>WASM (no SIMD)</div>
+      <div class="leg"><div class="sq" style="background:#f85149"></div>Plain JS CPU</div>
+    </div>
+  </div>
+  <div class="card">
+    <h2>WASM speedup ratio vs. plain JS</h2>
+    <canvas id="speedup" height="220"></canvas>
+    <div class="legend">
+      <div class="leg"><div class="sq" style="background:#3fb950"></div>Chrome</div>
+      <div class="leg"><div class="sq" style="background:#d29922"></div>Firefox</div>
+      <div class="leg"><div class="sq" style="background:#58a6ff"></div>Edge</div>
+    </div>
+  </div>
+  <div class="card">
+    <h2>Initialization latency (ms)</h2>
+    <canvas id="init" height="180"></canvas>
+    <div class="legend"><div class="leg"><div class="sq" style="background:#a371f7"></div>First-inference overhead per backend</div></div>
+  </div>
+  <div class="card">
+    <h2>SIMD gain — WASM+SIMD vs. WASM baseline</h2>
+    <canvas id="simd" height="180"></canvas>
+    <div class="legend"><div class="leg"><div class="sq" style="background:#3fb950"></div>SIMD speedup factor</div></div>
+  </div>
+</div>
+
+<div class="card" style="margin-bottom:14px">
+  <h2>Summary Table — median throughput (ops/sec) by browser</h2>
+  <table id="tbl"></table>
+</div>
+
+<script>
+const TENSOR_SIZES = [1, 4, 16, 64, 256, 1024, 4096];
+const BROWSERS = ['Chrome', 'Firefox', 'Edge'];
+const BACKEND_COLORS = { 'WASM+SIMD': '#a371f7', 'WASM': '#58a6ff', 'JS CPU': '#f85149' };
+const BROWSER_COLORS = { Chrome: '#3fb950', Firefox: '#d29922', Edge: '#58a6ff' };
+
+// Simulate benchmark data
+function simulate() {
+  const data = {};
+  TENSOR_SIZES.forEach(sz => {
+    data[sz] = {};
+    // JS CPU: baseline, scales linearly with size
+    const cpuBase = 500 / sz;
+    data[sz]['JS CPU'] = { Chrome: cpuBase, Firefox: cpuBase * 0.85, Edge: cpuBase * 0.97 };
+    // WASM: better for larger tensors; small tensors have overhead
+    const wasmMul = sz < 16 ? 0.7 : sz < 256 ? 1.8 : 2.8;
+    const wasmBase = cpuBase * wasmMul;
+    data[sz]['WASM'] = { Chrome: wasmBase, Firefox: wasmBase * 0.82, Edge: wasmBase * 0.98 };
+    // WASM+SIMD: 4x for float32 when sz is large enough
+    const simdMul = sz < 4 ? 0.6 : sz < 16 ? 1.2 : 3.8;
+    const simdBase = cpuBase * simdMul;
+    data[sz]['WASM+SIMD'] = { Chrome: simdBase, Firefox: simdBase * 0.76, Edge: simdBase * 0.97 };
+    // add noise
+    Object.keys(data[sz]).forEach(b => Object.keys(data[sz][b]).forEach(br => { data[sz][b][br] *= 0.9 + Math.random() * 0.2; }));
+  });
+  return data;
+}
+
+function barChart(canvasId, labels, datasets) {
+  const cv = document.getElementById(canvasId);
+  const ctx = cv.getContext('2d');
+  const W = cv.clientWidth * devicePixelRatio, H = cv.clientHeight * devicePixelRatio;
+  cv.width = W; cv.height = H;
+  const pad = { l: 44, r: 12, t: 16, b: 32 };
+  const n = labels.length, nds = datasets.length;
+  const gw = (W - pad.l - pad.r) / n;
+  const bw = gw * 0.7 / nds;
+  const maxVal = Math.max(...datasets.flatMap(d => d.values));
+  ctx.fillStyle = '#0d1117'; ctx.fillRect(0, 0, W, H);
+  ctx.strokeStyle = '#21262d'; ctx.lineWidth = 1;
+  [0, .25, .5, .75, 1].forEach(v => { const y = pad.t + (1 - v) * (H - pad.t - pad.b); ctx.beginPath(); ctx.moveTo(pad.l, y); ctx.lineTo(W - pad.r, y); ctx.stroke(); ctx.fillStyle = '#8b949e'; ctx.font = `${8 * devicePixelRatio}px monospace`; ctx.fillText((maxVal * v).toFixed(0), 2, y + 3); });
+  datasets.forEach((ds, di) => {
+    ds.values.forEach((v, i) => {
+      const x = pad.l + i * gw + gw * 0.15 + di * bw;
+      const barH = (v / maxVal) * (H - pad.t - pad.b);
+      const y = H - pad.b - barH;
+      ctx.fillStyle = ds.color; ctx.fillRect(x, y, bw - 2, barH);
+    });
+  });
+  ctx.fillStyle = '#8b949e'; ctx.font = `${8 * devicePixelRatio}px sans-serif`;
+  labels.forEach((l, i) => { const x = pad.l + i * gw + gw / 2; ctx.fillText(l, x - 8, H - 8); });
+}
+
+function lineChart(canvasId, labels, datasets) {
+  const cv = document.getElementById(canvasId);
+  const ctx = cv.getContext('2d');
+  const W = cv.clientWidth * devicePixelRatio, H = cv.clientHeight * devicePixelRatio;
+  cv.width = W; cv.height = H;
+  const pad = { l: 44, r: 12, t: 16, b: 32 };
+  const maxVal = Math.max(...datasets.flatMap(d => d.values), 1);
+  ctx.fillStyle = '#0d1117'; ctx.fillRect(0, 0, W, H);
+  ctx.strokeStyle = '#21262d'; ctx.lineWidth = 1;
+  [0, .25, .5, .75, 1].forEach(v => { const y = pad.t + (1 - v) * (H - pad.t - pad.b); ctx.beginPath(); ctx.moveTo(pad.l, y); ctx.lineTo(W - pad.r, y); ctx.stroke(); ctx.fillStyle = '#8b949e'; ctx.font = `${8 * devicePixelRatio}px monospace`; ctx.fillText((maxVal * v).toFixed(1), 2, y + 3); });
+  datasets.forEach(ds => {
+    ctx.beginPath(); ctx.strokeStyle = ds.color; ctx.lineWidth = 2.2 * devicePixelRatio;
+    ds.values.forEach((v, i) => { const x = pad.l + i / (labels.length - 1) * (W - pad.l - pad.r), y = pad.t + (1 - v / maxVal) * (H - pad.t - pad.b); i ? ctx.lineTo(x, y) : ctx.moveTo(x, y); });
+    ctx.stroke();
+  });
+  ctx.fillStyle = '#8b949e'; ctx.font = `${8 * devicePixelRatio}px sans-serif`;
+  labels.forEach((l, i) => { const x = pad.l + i / (labels.length - 1) * (W - pad.l - pad.r); ctx.fillText(l, x - 8, H - 8); });
+}
+
+function run() {
+  const data = simulate();
+  const lbls = TENSOR_SIZES.map(s => s >= 1024 ? (s / 1024) + 'K' : s + '');
+  // Throughput bar chart (Chrome only)
+  barChart('throughput', lbls, ['WASM+SIMD', 'WASM', 'JS CPU'].map(b => ({ color: BACKEND_COLORS[b], values: TENSOR_SIZES.map(sz => data[sz][b].Chrome) })));
+  // Speedup line chart per browser
+  lineChart('speedup', lbls, BROWSERS.map(br => ({ color: BROWSER_COLORS[br], values: TENSOR_SIZES.map(sz => (data[sz]['WASM+SIMD'][br] / data[sz]['JS CPU'][br])) })));
+  // Init latency bar (simulated fixed values per backend)
+  const initData = [{ name: 'WASM+SIMD', color: '#a371f7', val: 320 }, { name: 'WASM', color: '#58a6ff', val: 180 }, { name: 'JS CPU', color: '#f85149', val: 15 }, { name: 'WebGL', color: '#3fb950', val: 1200 }];
+  barChart('init', initData.map(d => d.name), [{ color: '#a371f7', values: initData.map(d => d.val) }]);
+  // SIMD gain
+  lineChart('simd', lbls, [{ color: '#3fb950', values: TENSOR_SIZES.map(sz => data[sz]['WASM+SIMD'].Chrome / data[sz]['WASM'].Chrome) }]);
+  // Table
+  const tbl = document.getElementById('tbl');
+  const bestBackend = (br) => {
+    let best = 'WASM+SIMD', bestV = 0;
+    ['WASM+SIMD', 'WASM', 'JS CPU'].forEach(b => { const v = data[1024][b][br]; if (v > bestV) { bestV = v; best = b; } });
+    return best;
+  };
+  tbl.innerHTML = `<tr><th>Browser</th><th>WASM+SIMD</th><th>WASM</th><th>JS CPU</th><th>Best backend</th></tr>` +
+    BROWSERS.map(br => `<tr><td>${br}</td>${['WASM+SIMD', 'WASM', 'JS CPU'].map(b => `<td>${data[1024][b][br].toFixed(0)}</td>`).join('')}<td class="win">${bestBackend(br)}</td></tr>`).join('');
+  // Metrics
+  const el = document.getElementById('metrics');
+  const chromeSIMD = TENSOR_SIZES.map(sz => data[sz]['WASM+SIMD'].Chrome / data[sz]['JS CPU'].Chrome);
+  const avgSpeedup = chromeSIMD.reduce((a, b) => a + b) / chromeSIMD.length;
+  const crossover = TENSOR_SIZES.find(sz => data[sz]['WASM+SIMD'].Chrome > data[sz]['JS CPU'].Chrome) || '?';
+  el.innerHTML = [
+    { lbl: 'Peak WASM speedup', num: Math.max(...chromeSIMD).toFixed(1) + '×', unit: 'vs. JS CPU (Chrome)' },
+    { lbl: 'Avg speedup', num: avgSpeedup.toFixed(1) + '×', unit: 'over all sizes' },
+    { lbl: 'Crossover point', num: crossover + ' KB', unit: 'WASM beats JS' },
+    { lbl: 'SIMD gain', num: (data[4096]['WASM+SIMD'].Chrome / data[4096]['WASM'].Chrome).toFixed(1) + '×', unit: 'at 4K tensors' }
+  ].map(m => `<div class="metric"><div class="lbl">${m.lbl}</div><div class="num">${m.num}</div><div class="unit">${m.unit}</div></div>`).join('');
+}
+document.getElementById('run').onclick = run;
+run();
+</script>
+</body>
+</html>
