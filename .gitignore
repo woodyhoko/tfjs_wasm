@@ -1,0 +1,6 @@
+geckodriver.log
+chromedriver.log
+*.log
+*.pickle
+.ipynb_checkpoints/
+__pycache__/
