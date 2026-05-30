@@ -3,81 +3,300 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TensorFlow.js — WASM vs. CPU Benchmarking</title>
-<meta name="description" content="Cross-browser inference performance analysis of TensorFlow.js backends — when is the WebAssembly backend worth it, and when does it regress?">
+<title>Benchmarking WebAssembly Performance — IMC '23</title>
+<meta name="description" content="Summary of the IMC '23 paper 'Benchmarking WebAssembly Performance in Real-World Applications and Libraries' — how the WebAssembly backend speeds up TensorFlow.js, OpenCV, OpenSSL and bioinformatics across browsers.">
+<meta property="og:title" content="Benchmarking WebAssembly Performance in Real-World Applications and Libraries">
+<meta property="og:description" content="WASM makes in-browser ML 15–20× faster, computer vision reaches native-like speeds with SIMD+threads, and HTTP caching cuts module response time by 81×.">
+<meta property="og:type" content="article">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-  :root{--bg:#0b0a14;--panel:#15131f;--ink:#f1edff;--muted:#9b93b8;--or:#ff8a00;--pu:#8b5cf6;--cy:#22d3ee;--line:rgba(255,255,255,.08)}
-  *{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+  :root{
+    --bg:#0b0a14;--panel:#15131f;--panel2:#1c1929;--ink:#f1edff;--muted:#9b93b8;
+    --or:#ff8a00;--pu:#8b5cf6;--cy:#22d3ee;--gr:#34d399;--line:rgba(255,255,255,.08)
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
   body{background:var(--bg);color:var(--ink);font-family:"Space Grotesk",system-ui,sans-serif;line-height:1.6;overflow-x:hidden}
   a{color:inherit;text-decoration:none}
-  .bg{position:fixed;inset:0;z-index:0;background:radial-gradient(800px 600px at 20% 0,rgba(255,138,0,.14),transparent 55%),radial-gradient(700px 600px at 85% 25%,rgba(139,92,246,.18),transparent 55%),var(--bg)}
-  .wrap{position:relative;z-index:3;max-width:1020px;margin:0 auto;padding:0 24px}
-  header{min-height:90vh;display:flex;flex-direction:column;justify-content:center;padding:80px 0 36px}
-  .tag{font-family:"JetBrains Mono";font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--or);margin-bottom:20px}
-  h1{font-weight:700;font-size:clamp(36px,6.5vw,80px);line-height:1.02;letter-spacing:-1.5px}
+  .bg{position:fixed;inset:0;z-index:0;background:
+      radial-gradient(820px 620px at 18% -5%,rgba(255,138,0,.13),transparent 55%),
+      radial-gradient(760px 640px at 88% 18%,rgba(139,92,246,.20),transparent 55%),
+      radial-gradient(680px 600px at 50% 110%,rgba(34,211,238,.10),transparent 55%),var(--bg)}
+  .wrap{position:relative;z-index:3;max-width:1080px;margin:0 auto;padding:0 24px}
+
+  /* nav */
+  nav{position:sticky;top:0;z-index:20;backdrop-filter:blur(10px);background:rgba(11,10,20,.6);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+  nav .brand{font-family:"JetBrains Mono";font-weight:700;font-size:14px;letter-spacing:.5px}
+  nav .brand b{color:var(--or)}
+  nav .links{display:flex;gap:22px;font-size:14px;color:var(--muted)}
+  nav .links a{transition:.15s}nav .links a:hover{color:var(--ink)}
+  @media(max-width:680px){nav .links{display:none}}
+
+  /* hero */
+  header{padding:70px 0 30px}
+  .tag{font-family:"JetBrains Mono";font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--or);margin-bottom:18px}
+  h1{font-weight:700;font-size:clamp(32px,5.6vw,64px);line-height:1.04;letter-spacing:-1.5px;max-width:14ch}
   h1 .gr{background:linear-gradient(110deg,var(--or),var(--pu));-webkit-background-clip:text;background-clip:text;color:transparent}
-  .lede{font-size:clamp(16px,2vw,21px);color:var(--muted);max-width:660px;margin:24px 0}
-  .cta{display:flex;flex-wrap:wrap;gap:13px;margin-top:28px}
-  .btn{display:inline-flex;align-items:center;gap:9px;padding:14px 26px;border-radius:12px;font-weight:700;font-size:15px;transition:.18s;border:1px solid var(--line)}
-  .btn.p{background:linear-gradient(110deg,var(--or),#ffb347);color:#2a1500;border:none}.btn.p:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(255,138,0,.35)}
-  .btn.g{background:rgba(255,255,255,.03)}.btn.g:hover{border-color:var(--pu);color:var(--pu);transform:translateY(-3px)}
-  section{padding:48px 0}
-  .lbl{font-family:"JetBrains Mono";font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--cy);margin-bottom:8px}
-  .ttl{font-weight:700;font-size:clamp(23px,3.4vw,36px);margin-bottom:28px;letter-spacing:-.5px}
-  .bars{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:28px}
-  .bar{display:grid;grid-template-columns:160px 1fr 70px;align-items:center;gap:14px;margin:12px 0;font-family:"JetBrains Mono";font-size:13px}
+  .lede{font-size:clamp(16px,2vw,20px);color:var(--muted);max-width:680px;margin:22px 0 6px}
+  .venue{font-family:"JetBrains Mono";font-size:12.5px;color:var(--cy);margin-top:14px}
+  .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+  .btn{display:inline-flex;align-items:center;gap:9px;padding:13px 24px;border-radius:12px;font-weight:600;font-size:15px;transition:.18s;border:1px solid var(--line)}
+  .btn.p{background:linear-gradient(110deg,var(--or),#ffb347);color:#2a1500;border:none}
+  .btn.p:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(255,138,0,.32)}
+  .btn.g{background:rgba(255,255,255,.03)}
+  .btn.g:hover{border-color:var(--pu);color:#c4b5fd;transform:translateY(-3px)}
+
+  section{padding:46px 0;scroll-margin-top:70px}
+  .lbl{font-family:"JetBrains Mono";font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--cy);margin-bottom:10px}
+  .ttl{font-weight:700;font-size:clamp(22px,3.2vw,34px);margin-bottom:10px;letter-spacing:-.5px}
+  .sub{color:var(--muted);max-width:720px;margin-bottom:26px;font-size:15.5px}
+
+  /* headline stats */
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px;position:relative;overflow:hidden}
+  .stat::after{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,var(--or),var(--pu))}
+  .stat .num{font-family:"JetBrains Mono";font-weight:700;font-size:34px;letter-spacing:-1px;background:linear-gradient(110deg,var(--or),#ffb347);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .stat.b .num{background:linear-gradient(110deg,var(--pu),#b794f6);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .stat.c .num{background:linear-gradient(110deg,var(--cy),#67e8f9);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .stat .t{font-size:14px;margin-top:6px;font-weight:600}
+  .stat .d{font-size:13px;color:var(--muted);margin-top:4px}
+
+  /* domain chips */
+  .domains{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+  .dom{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px;transition:.2s}
+  .dom:hover{transform:translateY(-4px);border-color:rgba(139,92,246,.45)}
+  .dom .ic{font-size:24px}
+  .dom h3{font-size:16px;margin:10px 0 6px}
+  .dom p{font-size:13.5px;color:var(--muted)}
+  .dom .lib{font-family:"JetBrains Mono";font-size:12px;color:var(--or);margin-top:10px}
+
+  /* figure */
+  .figrow{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:680px){.figrow{grid-template-columns:1fr}}
+  figure{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;margin:0}
+  figure img{width:100%;border-radius:9px;display:block;background:#fff}
+  figcaption{font-size:13px;color:var(--muted);margin-top:12px}
+  figcaption b{color:var(--ink)}
+
+  /* table */
+  .tblwrap{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th,td{padding:13px 16px;text-align:left;border-bottom:1px solid var(--line)}
+  thead th{font-family:"JetBrains Mono";font-size:11.5px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);background:var(--panel2)}
+  tbody tr:last-child td{border-bottom:none}
+  td.mono{font-family:"JetBrains Mono"}
+  .imp{font-family:"JetBrains Mono";font-weight:700;color:var(--gr)}
+  .browser{font-weight:600}
+
+  /* bars (first-param phenomenon) */
+  .bars{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:26px}
+  .bar{display:grid;grid-template-columns:140px 1fr 86px;align-items:center;gap:14px;margin:13px 0;font-family:"JetBrains Mono";font-size:13px}
+  @media(max-width:560px){.bar{grid-template-columns:96px 1fr 70px;font-size:12px}}
   .bar .track{height:14px;background:#0a0912;border-radius:8px;overflow:hidden}
-  .bar .fill{height:100%;border-radius:8px;width:0;animation:grow 1.4s cubic-bezier(.2,.8,.2,1) forwards}
+  .bar .fill{height:100%;border-radius:8px;width:0}
+  .bar.run .fill{animation:grow 1.3s cubic-bezier(.2,.8,.2,1) forwards}
   @keyframes grow{to{width:var(--w)}}
   .bar .v{text-align:right;color:var(--muted)}
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+
+  /* RQ cards */
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
   .c{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px;transition:.2s}
   .c:hover{transform:translateY(-4px);border-color:rgba(255,138,0,.4)}
-  .c .k{font-family:"JetBrains Mono";font-size:12px;color:var(--or);letter-spacing:1px}
-  .c h3{font-size:16px;margin:6px 0 8px}.c p{font-size:14px;color:var(--muted)}
-  footer{border-top:1px solid var(--line);margin-top:50px;padding:38px 0 56px;text-align:center;color:var(--muted);font-size:14px}
-  footer a{color:var(--or)}.fl{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-bottom:16px}
+  .c .k{font-family:"JetBrains Mono";font-size:11.5px;color:var(--or);letter-spacing:1px}
+  .c h3{font-size:16px;margin:7px 0 8px}
+  .c p{font-size:14px;color:var(--muted)}
+  .c p .hl{color:var(--cy);font-weight:600}
+
+  /* references */
+  .refs{counter-reset:r;display:flex;flex-direction:column;gap:14px}
+  .ref{display:flex;gap:16px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+  .ref::before{counter-increment:r;content:counter(r);font-family:"JetBrains Mono";font-weight:700;color:var(--or);font-size:15px;min-width:22px}
+  .ref .body{font-size:14.5px}
+  .ref .body .src{color:var(--muted);font-size:13px;margin-top:3px}
+  .ref .body a{color:var(--cy);border-bottom:1px solid rgba(34,211,238,.3)}
+  .ref .body a:hover{color:#67e8f9}
+
+  footer{border-top:1px solid var(--line);margin-top:40px;padding:36px 0 60px;text-align:center;color:var(--muted);font-size:14px}
+  footer a{color:var(--or)}
+  .fl{display:flex;gap:22px;justify-content:center;flex-wrap:wrap;margin-bottom:14px}
+  .disc{font-size:12.5px;max-width:640px;margin:14px auto 0;color:#6f6890}
 </style></head>
 <body>
 <div class="bg"></div>
+
+<nav><div class="wrap">
+  <div class="brand"><b>wasm</b>·benchmark</div>
+  <div class="links">
+    <a href="#results">Results</a>
+    <a href="#ml">In-browser ML</a>
+    <a href="#phenomenon">Findings</a>
+    <a href="#refs">References</a>
+  </div>
+</div></nav>
+
 <div class="wrap">
   <header>
-    <div class="tag">TensorFlow.js · WebAssembly · Selenium</div>
-    <h1>When is <span class="gr">WASM</span><br>actually faster?</h1>
-    <p class="lede">TensorFlow.js runs inference on three interchangeable backends — WebGL, WebAssembly, and plain JS. This project benchmarks WASM vs. CPU across operation shapes and three browsers via Selenium-automated timing, answering: when is WASM worth it, and when does it regress?</p>
+    <div class="tag">IMC '23 · Experience Paper</div>
+    <h1>Benchmarking <span class="gr">WebAssembly</span> in real-world apps.</h1>
+    <p class="lede">A systematic study of how the WebAssembly backend changes performance across four computational domains — <b>machine learning, computer vision, cryptography, and bioinformatics</b> — measured across Chrome, Edge, Firefox, and Safari.</p>
+    <div class="venue">ACM Internet Measurement Conference (IMC '23) · October 24–26, 2023 · Montréal, Canada</div>
     <div class="cta">
-      <a class="btn p" href="demo.html">▶ Open Benchmark Visualizer</a>
-      <a class="btn g" href="https://github.com/woodyhoko/tfjs_wasm#readme">📖 Documentation</a>
-      <a class="btn g" href="https://github.com/woodyhoko/tfjs_wasm">⌥ Source</a>
+      <a class="btn p" href="imc2023_benchmarking_wasm_SUBMISSION.pdf">📄 Read the paper (PDF)</a>
+      <a class="btn g" href="https://github.com/woodyhoko/tfjs_wasm">⌥ Source &amp; data</a>
+      <a class="btn g" href="demo.html">▶ Benchmark visualizer</a>
     </div>
   </header>
 
-  <section>
-    <div class="lbl">representative result</div>
-    <div class="ttl">WASM+SIMD vs. plain JS (medium tensors).</div>
-    <div class="bars">
-      <div class="bar"><span>WASM SIMD+threads</span><div class="track"><div class="fill" style="--w:100%;background:linear-gradient(90deg,var(--or),#ffb347)"></div></div><span class="v">3–5×</span></div>
-      <div class="bar"><span>WASM (SIMD only)</span><div class="track"><div class="fill" style="--w:74%;background:linear-gradient(90deg,var(--pu),#b794f6)"></div></div><span class="v">~2.5×</span></div>
-      <div class="bar"><span>Plain JS (CPU)</span><div class="track"><div class="fill" style="--w:26%;background:linear-gradient(90deg,var(--cy),#67e8f9)"></div></div><span class="v">1×</span></div>
+  <!-- HEADLINE RESULTS -->
+  <section id="results">
+    <div class="lbl">at a glance</div>
+    <div class="ttl">What the numbers say.</div>
+    <p class="sub">Across representative ML, vision and web-app workloads, moving from a plain-JavaScript path to the WebAssembly backend produced large, consistent speedups.</p>
+    <div class="stats">
+      <div class="stat"><div class="num">15.5×</div><div class="t">Faster vision inference</div><div class="d">MobileNet image classification, WASM vs. no-WASM backend</div></div>
+      <div class="stat b"><div class="num">~20×</div><div class="t">Faster NLP inference</div><div class="d">MobileBERT question-answering, WASM vs. no-WASM</div></div>
+      <div class="stat c"><div class="num">81×</div><div class="t">Faster module load</div><div class="d">Average gain from optimized HTTP caching of WASM modules</div></div>
+      <div class="stat"><div class="num">~30 fps</div><div class="t">Real-time vision</div><div class="d">Reached on nearly all OpenCV ops with SIMD + multithreading</div></div>
     </div>
   </section>
 
+  <!-- DOMAINS -->
   <section>
-    <div class="lbl">findings</div>
-    <div class="ttl">It depends on tensor size.</div>
+    <div class="lbl">scope</div>
+    <div class="ttl">Four domains, real libraries.</div>
+    <p class="sub">Rather than synthetic benchmark suites, the paper ports and measures the libraries developers actually ship to the browser.</p>
+    <div class="domains">
+      <div class="dom"><div class="ic">🧠</div><h3>Machine learning</h3><p>In-browser inference on the WASM vs. CPU/JS backend, profiling the kernels that dominate runtime.</p><div class="lib">TensorFlow.js · MobileNet · MobileBERT</div></div>
+      <div class="dom"><div class="ic">👁️</div><h3>Computer vision</h3><p>30 image operations across asm.js, WASM, +SIMD, +multithreading, and both combined — plus live video FPS.</p><div class="lib">OpenCV 4.7.0</div></div>
+      <div class="dom"><div class="ic">🔐</div><h3>Cryptography</h3><p>AES-256 and SHA-256 on strings and 1 MB–1 GB files, WASM vs. browser-native crypto.subtle.</p><div class="lib">OpenSSL 3.0.8</div></div>
+      <div class="dom"><div class="ic">🧬</div><h3>Bioinformatics</h3><p>Protein &amp; DNA multiple-sequence alignment, with a forked toolchain to remove WASM/native output discrepancies.</p><div class="lib">Kalign · Seq-align</div></div>
+    </div>
+  </section>
+
+  <!-- ML DEEP DIVE -->
+  <section id="ml">
+    <div class="lbl">machine learning · this repository</div>
+    <div class="ttl">In-browser ML gets dramatically faster with WASM.</div>
+    <p class="sub">Running 100 iterations of MobileNet (vision) and MobileBERT (NLP) on an i7-10870H, the WebAssembly backend cut runtime by an order of magnitude. Chrome was consistently fastest and Firefox the slowest, in both backends.</p>
+
+    <div class="figrow">
+      <figure>
+        <img src="graphs/Vision%20task%20with%20WASM.png" alt="Histogram of MobileNet vision-task execution time per browser with the WASM backend">
+        <figcaption><b>Vision task — WASM backend.</b> Execution-time distribution across Edge, Chrome and Firefox. Most runs cluster tightly near ~110–120 ms.</figcaption>
+      </figure>
+      <figure>
+        <img src="graphs/Vision%20task%20with%20no%20WASM.png" alt="Histogram of MobileNet vision-task execution time per browser without the WASM backend">
+        <figcaption><b>Vision task — no WASM (CPU/JS).</b> The same workload on the plain-JS backend runs ~15× slower, with a far wider, heavier tail.</figcaption>
+      </figure>
+    </div>
+
+    <div style="height:22px"></div>
+    <div class="tblwrap">
+      <table>
+        <thead><tr><th>Task</th><th>Browser</th><th>WASM (ms)</th><th>No WASM (ms)</th><th>Speedup</th></tr></thead>
+        <tbody>
+          <tr><td>Vision (MobileNet)</td><td class="browser">Chrome</td><td class="mono">114.41</td><td class="mono">1,788.58</td><td class="imp">15.54×</td></tr>
+          <tr><td>Vision (MobileNet)</td><td class="browser">Edge</td><td class="mono">119.17</td><td class="mono">1,997.11</td><td class="imp">15.03×</td></tr>
+          <tr><td>Vision (MobileNet)</td><td class="browser">Firefox</td><td class="mono">121.32</td><td class="mono">2,130.98</td><td class="imp">15.48×</td></tr>
+          <tr><td>NLP (MobileBERT)</td><td class="browser">Chrome</td><td class="mono">1,777.59</td><td class="mono">36,337.35</td><td class="imp">20.32×</td></tr>
+          <tr><td>NLP (MobileBERT)</td><td class="browser">Edge</td><td class="mono">1,791.04</td><td class="mono">37,402.71</td><td class="imp">18.73×</td></tr>
+          <tr><td>NLP (MobileBERT)</td><td class="browser">Firefox</td><td class="mono">1,877.68</td><td class="mono">39,916.36</td><td class="imp">18.73×</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="sub" style="margin-top:14px;font-size:13.5px">Table 6 — average runtime and speedup of the WASM vs. no-WASM backend. Individual vision kernels saw gaps as large as <b style="color:var(--cy)">21.5×</b>.</p>
+  </section>
+
+  <!-- FIRST PARAM PHENOMENON -->
+  <section id="phenomenon">
+    <div class="lbl">a surprising finding</div>
+    <div class="ttl">The "first-argument advantage" on V8.</div>
+    <p class="sub">Profiling the fundamental arithmetic kernels behind CNNs, the study uncovered a quirk: on V8-based browsers (Chrome &amp; Edge), the <b>first tensor passed</b> into a WASM operation is computed measurably faster than the second — independent of input order or memory location. The effect vanished on Firefox's SpiderMonkey engine, pointing to engine-level memory-table allocation strategy rather than JavaScript reference passing.</p>
+
+    <div class="figrow">
+      <figure>
+        <img src="graphs/addition_wasm.png" alt="Per-test execution time of addition operands on the WASM backend">
+        <figcaption><b>Addition — WASM backend.</b> Operand <b style="color:#3b82f6">a</b> (first argument) consistently finishes below <b style="color:#f59e0b">b</b>; the "data sync" read-back dominates total cost.</figcaption>
+      </figure>
+      <figure>
+        <img src="graphs/addition_cpu.png" alt="Per-test execution time of addition operands on the CPU/JS backend">
+        <figcaption><b>Addition — CPU / no WASM.</b> Without WASM the per-operand asymmetry is not present in the same way, isolating the effect to the WASM path.</figcaption>
+      </figure>
+    </div>
+
+    <div style="height:22px"></div>
+    <div class="bars">
+      <div class="bar run"><span>a (1st arg)</span><div class="track"><div class="fill" style="--w:38%;background:linear-gradient(90deg,#3b82f6,#60a5fa)"></div></div><span class="v">fastest</span></div>
+      <div class="bar run"><span>b (2nd arg)</span><div class="track"><div class="fill" style="--w:52%;background:linear-gradient(90deg,var(--or),#ffb347)"></div></div><span class="v">slower</span></div>
+      <div class="bar run"><span>cache / orig.</span><div class="track"><div class="fill" style="--w:56%;background:linear-gradient(90deg,var(--gr),#6ee7b7)"></div></div><span class="v">slower</span></div>
+      <div class="bar run"><span>data sync</span><div class="track"><div class="fill" style="--w:100%;background:linear-gradient(90deg,var(--pu),#b794f6)"></div></div><span class="v">dominant</span></div>
+    </div>
+    <p class="sub" style="margin-top:14px;font-size:13.5px">Relative per-step cost (illustrative). Reading results back out of the WASM heap ("data sync") is the single largest contributor — a reminder that for small tensors, transfer overhead can outweigh compute.</p>
+  </section>
+
+  <!-- RESEARCH QUESTIONS -->
+  <section>
+    <div class="lbl">findings by research question</div>
+    <div class="ttl">What the study concluded.</div>
     <div class="grid">
-      <div class="c"><div class="k">CHROME / EDGE</div><h3>3–5× speedup</h3><p>WASM SIMD + threads is the fastest CPU path; Edge matches Chrome since both use V8's WASM compilers.</p></div>
-      <div class="c"><div class="k">FIREFOX</div><h3>Version-dependent</h3><p>SIMD support varies by version; threading needs explicit COOP/COEP server headers.</p></div>
-      <div class="c"><div class="k">SMALL TENSORS</div><h3>WASM regresses</h3><p>Below ~1 KB, WASM's fixed per-call overhead loses to plain JS — crossover around 10–50 KB.</p></div>
-      <div class="c"><div class="k">METHOD</div><h3>Selenium timing</h3><p>50 repeats after warm-up, <span style="color:var(--or)">performance.now()</span>, automated across all three browsers.</p></div>
+      <div class="c"><div class="k">RQ1 · SIMD + THREADS</div><h3>Near-native vision</h3><p>SIMD never hurt and often helped; <span class="hl">MT + SIMD together</span> let almost every OpenCV op hit ~30 fps — Haar Cascades &amp; Median Blur the exceptions.</p></div>
+      <div class="c"><div class="k">RQ2 · CROSS-BROWSER</div><h3>Chrome leads, Firefox trails</h3><p>WASM gave <span class="hl">15–20×</span> ML speedups everywhere. Chrome &amp; Edge (V8) beat Firefox (SpiderMonkey), most visibly on short crypto operations.</p></div>
+      <div class="c"><div class="k">RQ3 · CRITICAL FUNCTIONS</div><h3>Memory, not just math</h3><p>The biggest WASM wins came from <span class="hl">fusedConv2d_, depthwiseConv2d_ and add_</span> — gains driven as much by memory management as by raw arithmetic.</p></div>
+      <div class="c"><div class="k">RQ4 · HTTP CACHING</div><h3>81× faster reloads</h3><p>Across 26 real WASM web apps, optimized code caching (TurboFan + WASM tiering) cut module response time by <span class="hl">81.15× on average</span> from cold to hot runs.</p></div>
+    </div>
+  </section>
+
+  <!-- METHOD -->
+  <section>
+    <div class="lbl">how it was measured</div>
+    <div class="ttl">Methodology.</div>
+    <div class="grid">
+      <div class="c"><div class="k">AUTOMATION</div><h3>Selenium + Puppeteer</h3><p>Headless, incognito browser drivers loaded each benchmark page; timings captured with <span class="hl">performance.now()</span> over repeated trials.</p></div>
+      <div class="c"><div class="k">TOOLCHAIN</div><h3>Emscripten ports</h3><p>OpenSSL, OpenCV and Kalign compiled to WASM via Emscripten; minimal HTML harnesses invoked each module directly.</p></div>
+      <div class="c"><div class="k">RIGOR</div><h3>Discrepancy control</h3><p>A forked Kalign with seedable RNG and disabled AVX2/OpenMP paths ensured WASM and native produced identical output before timing.</p></div>
+      <div class="c"><div class="k">HARDWARE</div><h3>Consumer devices</h3><p>i7-10870H laptop and i5-10600K desktop for ML; multiple PCs and a MacBook Pro for crypto and caching tests.</p></div>
+    </div>
+  </section>
+
+  <!-- REFERENCES -->
+  <section id="refs">
+    <div class="lbl">cite &amp; explore</div>
+    <div class="ttl">References.</div>
+    <div class="refs">
+      <div class="ref"><div class="body">
+        <b>Benchmarking WebAssembly Performance in Real-World Applications and Libraries.</b>
+        <div class="src">Proceedings of the ACM Internet Measurement Conference (IMC '23), Oct. 24–26 2023, Montréal, Canada. &nbsp;·&nbsp; <a href="imc2023_benchmarking_wasm_SUBMISSION.pdf">Read the paper (PDF)</a></div>
+      </div></div>
+      <div class="ref"><div class="body">
+        <b>Source code, datasets &amp; notebooks — this project.</b>
+        <div class="src">TensorFlow.js WASM-vs-CPU benchmarking pipeline, pre-collected timing data and analysis. &nbsp;·&nbsp; <a href="https://github.com/woodyhoko/tfjs_wasm">github.com/woodyhoko/tfjs_wasm</a></div>
+      </div></div>
+      <div class="ref"><div class="body">
+        <b>Companion benchmark repositories.</b>
+        <div class="src">Modified Kalign fork: <a href="https://github.com/wasm-benchmarking/kalign-wasm">kalign-wasm</a> · servable test page: <a href="https://github.com/wasm-benchmarking/kalign-test">kalign-test</a> · OpenSSL pipeline: <a href="https://github.com/wasm-benchmarking/openssl-wasm">openssl-wasm</a></div>
+      </div></div>
+      <div class="ref"><div class="body">
+        <b>A. Haas et al. — Bringing the Web up to Speed with WebAssembly.</b>
+        <div class="src">PLDI '17, ACM SIGPLAN, pp. 185–200. &nbsp;·&nbsp; <a href="https://doi.org/10.1145/3062341.3062363">doi:10.1145/3062341.3062363</a></div>
+      </div></div>
+      <div class="ref"><div class="body">
+        <b>TensorFlow.js — Machine learning for JavaScript developers.</b>
+        <div class="src">Google. &nbsp;·&nbsp; <a href="https://www.tensorflow.org/js">tensorflow.org/js</a></div>
+      </div></div>
     </div>
   </section>
 
   <footer>
-    <div class="fl"><a href="demo.html">Visualizer</a><a href="https://github.com/woodyhoko/tfjs_wasm">GitHub</a><a href="https://github.com/woodyhoko/tfjs_wasm#readme">README</a></div>
-    Built by <a href="https://github.com/woodyhoko">woodyhoko</a> · TensorFlow.js WASM vs. CPU Benchmarking
+    <div class="fl">
+      <a href="imc2023_benchmarking_wasm_SUBMISSION.pdf">Paper</a>
+      <a href="https://github.com/woodyhoko/tfjs_wasm">GitHub</a>
+      <a href="https://github.com/woodyhoko/tfjs_wasm#readme">README</a>
+      <a href="demo.html">Visualizer</a>
+    </div>
+    Summary page for the IMC '23 WebAssembly benchmarking paper · maintained by <a href="https://github.com/woodyhoko">woodyhoko</a>
+    <p class="disc">This page summarizes results from the linked paper for quick reference. Figures are generated from the experiments in this repository; consult the PDF for full methodology, statistical analysis and complete results.</p>
   </footer>
 </div>
 </body></html>

@@ -2,6 +2,13 @@
 
 *Cross-browser inference performance analysis of TensorFlow.js backends using Selenium-automated timing.*
 
+> 📄 **Companion artifact for the IMC '23 paper** — *"Benchmarking WebAssembly Performance in Real-World Applications and Libraries"* (ACM Internet Measurement Conference, Oct 24–26 2023, Montréal, Canada).
+> This repository holds the machine-learning / TensorFlow.js portion of that study: the benchmark harness, pre-collected timing data, and the analysis behind the **15–20× WASM speedups** and the V8 "first-argument advantage" finding.
+>
+> • **Read the paper:** [`imc2023_benchmarking_wasm_SUBMISSION.pdf`](imc2023_benchmarking_wasm_SUBMISSION.pdf)
+> • **Results summary (web):** [`index.html`](index.html) — a one-page visual overview
+> • **Source:** [github.com/woodyhoko/tfjs_wasm](https://github.com/woodyhoko/tfjs_wasm)
+
 ---
 
 ## 1. Background
@@ -105,12 +112,31 @@ The notebook generates:
 
 ---
 
-## 6. References
+## 6. Headline results (from the paper)
 
-1. TensorFlow.js Team. "Introducing the WebAssembly backend for TensorFlow.js." *Google Developers Blog*, 2020.
-2. A. Haas et al. "Bringing the Web up to Speed with WebAssembly." *PLDI '17*, 2017.
-3. W3C. *WebAssembly SIMD Proposal.* github.com/WebAssembly/simd, 2021.
-4. MDN. *SharedArrayBuffer and Atomics.* developer.mozilla.org, 2023.
+| Task | Backend speedup (WASM vs. plain JS) | Fastest browser |
+|---|---|---|
+| **MobileNet** image classification (vision) | **~15.5×** | Chrome |
+| **MobileBERT** question answering (NLP) | **~20×** | Chrome |
+| Individual vision kernels (e.g. `fusedConv2d_`) | up to **21.5×** | — |
+| WASM module reload via optimized HTTP caching | **81.15×** average | — |
+
+Additional findings:
+
+- **Critical functions** — the largest WASM gains come from `fusedConv2d_`, `depthwiseConv2d_`, and `add_`; improvements are driven as much by memory management as by raw arithmetic.
+- **First-argument advantage** — on V8 browsers (Chrome/Edge), the first tensor argument to a WASM op computes measurably faster than the second; the effect is absent on Firefox's SpiderMonkey, pointing to engine-level memory-table allocation.
+- **SIMD + threads** — nearly all OpenCV operations reach ~30 fps with multithreading + SIMD enabled (Haar Cascades and Median Blur excepted).
+
+---
+
+## 7. References
+
+1. *Benchmarking WebAssembly Performance in Real-World Applications and Libraries.* **IMC '23**, ACM Internet Measurement Conference, Oct 24–26 2023, Montréal, Canada. — see [`imc2023_benchmarking_wasm_SUBMISSION.pdf`](imc2023_benchmarking_wasm_SUBMISSION.pdf).
+2. This repository — TensorFlow.js WASM-vs-CPU benchmark pipeline, data, and notebooks: [github.com/woodyhoko/tfjs_wasm](https://github.com/woodyhoko/tfjs_wasm).
+3. Companion benchmark repos: [`kalign-wasm`](https://github.com/wasm-benchmarking/kalign-wasm), [`kalign-test`](https://github.com/wasm-benchmarking/kalign-test), [`openssl-wasm`](https://github.com/wasm-benchmarking/openssl-wasm).
+4. A. Haas et al. "Bringing the Web up to Speed with WebAssembly." *PLDI '17*, ACM SIGPLAN, pp. 185–200. [doi:10.1145/3062341.3062363](https://doi.org/10.1145/3062341.3062363).
+5. TensorFlow.js — Machine learning for JavaScript developers: [tensorflow.org/js](https://www.tensorflow.org/js).
+6. A. G. Howard et al. "MobileNets: Efficient Convolutional Neural Networks for Mobile Vision Applications." *arXiv:1704.04861*, 2017.
 
 ---
 
