@@ -3,183 +3,229 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TF.js WASM Benchmark Visualizer</title>
+<title>TF.js WASM vs CPU — Live Benchmark</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+  :root{--bg:#0c0a16;--pan:#161226;--pan2:#100d1f;--line:#2b2440;--ink:#ece9f7;--muted:#9a90bd;
+        --wasm:#a371f7;--cpu:#fb7185;--acc:#22d3ee;--good:#34d399}
   *{box-sizing:border-box;margin:0;padding:0}
-  body{background:#0d1117;color:#e6edf3;font-family:"Segoe UI",system-ui,sans-serif;padding:20px;min-height:100vh}
-  h1{font-size:20px;margin-bottom:4px;color:#a371f7}
-  .sub{color:#8b949e;font-size:13px;margin-bottom:20px}
-  .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
-  @media(max-width:650px){.grid{grid-template-columns:1fr}}
-  .card{background:#161b22;border:1px solid #30363d;border-radius:12px;padding:15px}
-  h2{font-size:12px;color:#8b949e;margin-bottom:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+  body{background:radial-gradient(1100px 600px at 78% -10%,#1c1338 0,var(--bg) 55%) fixed,var(--bg);
+       color:var(--ink);font-family:Inter,system-ui,sans-serif;padding:24px 18px 40px;min-height:100vh;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1120px;margin:0 auto}
+  h1{font-family:"Space Grotesk";font-size:24px;font-weight:700;
+     background:linear-gradient(90deg,var(--wasm),var(--acc) 60%,var(--cpu));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{color:var(--muted);font-size:13.5px;line-height:1.6;max-width:840px;margin:6px 0 16px}
+  .sub b{color:var(--ink)}
+  .btns{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+  button{padding:10px 18px;border:none;border-radius:10px;cursor:pointer;font-size:13px;font-weight:700;transition:.15s}
+  .bp{background:linear-gradient(90deg,var(--wasm),var(--acc));color:#160a1f;box-shadow:0 6px 18px rgba(163,113,247,.3)}
+  .bp:hover{filter:brightness(1.08);transform:translateY(-1px)}.bp:disabled{opacity:.5;cursor:default;transform:none}
+  .bs{background:#221a37;color:var(--ink);border:1px solid var(--line)}.bs:hover{background:#2a2143}
+  #status{font-size:12px;color:var(--muted);margin-left:6px}
+  .metric-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
+  @media(max-width:640px){.metric-row{grid-template-columns:repeat(2,1fr)}}
+  .metric{background:linear-gradient(180deg,var(--pan),var(--pan2));border:1px solid var(--line);border-radius:13px;padding:13px 14px}
+  .metric .lbl{font-size:10.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:6px}
+  .metric .num{font-size:22px;font-weight:800;font-variant-numeric:tabular-nums;line-height:1}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:760px){.grid{grid-template-columns:1fr}}
+  .card{background:linear-gradient(180deg,var(--pan),var(--pan2));border:1px solid var(--line);border-radius:14px;padding:15px}
+  h2{font-size:12px;color:var(--ink);margin-bottom:3px;font-weight:700}
+  .cdesc{font-size:11px;color:var(--muted);margin-bottom:10px}
   canvas{width:100%;display:block}
-  .legend{font-size:11px;color:#8b949e;margin-top:8px;display:flex;flex-wrap:wrap;gap:10px}
-  .leg{display:flex;align-items:center;gap:4px}
-  .sq{width:10px;height:10px;border-radius:2px;flex:0 0 10px}
-  .metric-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
-  .metric{background:#161b22;border:1px solid #30363d;border-radius:10px;padding:12px;text-align:center}
-  .metric .lbl{font-size:11px;color:#8b949e;margin-bottom:3px}
-  .metric .num{font-size:18px;font-weight:700;color:#a371f7}
-  .metric .unit{font-size:10px;color:#8b949e}
-  button{padding:8px 18px;border:none;border-radius:8px;cursor:pointer;background:#a371f7;color:#0d1117;font-weight:700;font-size:13px;margin-bottom:16px;transition:.15s}
-  button:hover{filter:brightness(1.08)}
-  table{width:100%;border-collapse:collapse;font-size:12px}
-  th,td{padding:7px 10px;text-align:left;border-bottom:1px solid #21262d}
-  th{color:#8b949e;font-weight:600}
-  td.win{color:#3fb950;font-weight:700}
+  .legend{font-size:11px;color:var(--muted);margin-top:8px;display:flex;gap:14px;flex-wrap:wrap}
+  .leg{display:flex;align-items:center;gap:5px}.sq{width:11px;height:11px;border-radius:3px}
 </style>
 </head>
 <body>
-<h1>TF.js — WASM vs. CPU Benchmark</h1>
-<p class="sub">Simulated cross-browser benchmark data visualizing TensorFlow.js WASM, CPU, and WebGL backend performance across tensor sizes.</p>
+<div class="wrap">
+  <h1>TF.js — WASM vs CPU, benchmarked live</h1>
+  <p class="sub">This actually runs two real TensorFlow.js workloads — a <b>vision</b> op (a 2-D convolution) and an <b>NLP</b> op (attention-style matmul + softmax) — over and over, under the <b>WASM</b> backend and the plain-JS <b>CPU</b> backend. Each run is one noisy sample. As samples pile up, the histograms <b>sharpen</b> and the running averages <b>converge</b> on each backend's true speed — you can watch the noise wash out.</p>
 
-<div class="metric-row" id="metrics"></div>
-<button id="run">Generate Benchmark Report</button>
+  <div class="btns">
+    <button class="bp" id="runBtn" disabled>Loading backends…</button>
+    <button class="bs" id="resetBtn">↺ Reset</button>
+    <span id="status">initialising TensorFlow.js…</span>
+  </div>
 
-<div class="grid">
-  <div class="card">
-    <h2>Throughput — ops/sec by backend</h2>
-    <canvas id="throughput" height="220"></canvas>
-    <div class="legend">
-      <div class="leg"><div class="sq" style="background:#a371f7"></div>WASM+SIMD</div>
-      <div class="leg"><div class="sq" style="background:#58a6ff"></div>WASM (no SIMD)</div>
-      <div class="leg"><div class="sq" style="background:#f85149"></div>Plain JS CPU</div>
+  <div class="metric-row">
+    <div class="metric"><div class="lbl">Trials</div><div class="num" style="color:var(--acc)" id="mTrials">0</div></div>
+    <div class="metric"><div class="lbl">Vision — WASM speedup</div><div class="num" style="color:var(--wasm)" id="mVis">—</div></div>
+    <div class="metric"><div class="lbl">NLP — WASM speedup</div><div class="num" style="color:var(--wasm)" id="mNlp">—</div></div>
+    <div class="metric"><div class="lbl">Noise (avg ±SE)</div><div class="num" style="color:var(--good)" id="mNoise">—</div></div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h2>Vision · conv2d — timing distribution</h2>
+      <div class="cdesc">per-run latency (ms); sharpens as trials accumulate</div>
+      <canvas id="histV" height="150"></canvas>
+      <div class="legend"><div class="leg"><div class="sq" style="background:var(--wasm)"></div>WASM</div><div class="leg"><div class="sq" style="background:var(--cpu)"></div>CPU (plain JS)</div></div>
     </div>
-  </div>
-  <div class="card">
-    <h2>WASM speedup ratio vs. plain JS</h2>
-    <canvas id="speedup" height="220"></canvas>
-    <div class="legend">
-      <div class="leg"><div class="sq" style="background:#3fb950"></div>Chrome</div>
-      <div class="leg"><div class="sq" style="background:#d29922"></div>Firefox</div>
-      <div class="leg"><div class="sq" style="background:#58a6ff"></div>Edge</div>
+    <div class="card">
+      <h2>NLP · matmul+softmax — timing distribution</h2>
+      <div class="cdesc">per-run latency (ms); sharpens as trials accumulate</div>
+      <canvas id="histN" height="150"></canvas>
+      <div class="legend"><div class="leg"><div class="sq" style="background:var(--wasm)"></div>WASM</div><div class="leg"><div class="sq" style="background:var(--cpu)"></div>CPU (plain JS)</div></div>
     </div>
-  </div>
-  <div class="card">
-    <h2>Initialization latency (ms)</h2>
-    <canvas id="init" height="180"></canvas>
-    <div class="legend"><div class="leg"><div class="sq" style="background:#a371f7"></div>First-inference overhead per backend</div></div>
-  </div>
-  <div class="card">
-    <h2>SIMD gain — WASM+SIMD vs. WASM baseline</h2>
-    <canvas id="simd" height="180"></canvas>
-    <div class="legend"><div class="leg"><div class="sq" style="background:#3fb950"></div>SIMD speedup factor</div></div>
+    <div class="card">
+      <h2>Vision · running average converging</h2>
+      <div class="cdesc">mean latency vs trial — flattens as the estimate stabilises</div>
+      <canvas id="convV" height="140"></canvas>
+    </div>
+    <div class="card">
+      <h2>NLP · running average converging</h2>
+      <div class="cdesc">mean latency vs trial — flattens as the estimate stabilises</div>
+      <canvas id="convN" height="140"></canvas>
+    </div>
   </div>
 </div>
 
-<div class="card" style="margin-bottom:14px">
-  <h2>Summary Table — median throughput (ops/sec) by browser</h2>
-  <table id="tbl"></table>
-</div>
-
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.11.0/dist/tf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-wasm@4.11.0/dist/tf-backend-wasm.min.js"></script>
 <script>
-const TENSOR_SIZES = [1, 4, 16, 64, 256, 1024, 4096];
-const BROWSERS = ['Chrome', 'Firefox', 'Edge'];
-const BACKEND_COLORS = { 'WASM+SIMD': '#a371f7', 'WASM': '#58a6ff', 'JS CPU': '#f85149' };
-const BROWSER_COLORS = { Chrome: '#3fb950', Firefox: '#d29922', Edge: '#58a6ff' };
+const COL={wasm:'#a371f7',cpu:'#fb7185',muted:'#9a90bd'};
+const samples={vision:{wasm:[],cpu:[]},nlp:{wasm:[],cpu:[]}};
+const meanHist={vision:{wasm:[],cpu:[]},nlp:{wasm:[],cpu:[]}};
+const inputs={cpu:{},wasm:{}};
+let running=false, trials=0, ready=false, timer=null;
 
-// Simulate benchmark data
-function simulate() {
-  const data = {};
-  TENSOR_SIZES.forEach(sz => {
-    data[sz] = {};
-    // JS CPU: baseline, scales linearly with size
-    const cpuBase = 500 / sz;
-    data[sz]['JS CPU'] = { Chrome: cpuBase, Firefox: cpuBase * 0.85, Edge: cpuBase * 0.97 };
-    // WASM: better for larger tensors; small tensors have overhead
-    const wasmMul = sz < 16 ? 0.7 : sz < 256 ? 1.8 : 2.8;
-    const wasmBase = cpuBase * wasmMul;
-    data[sz]['WASM'] = { Chrome: wasmBase, Firefox: wasmBase * 0.82, Edge: wasmBase * 0.98 };
-    // WASM+SIMD: 4x for float32 when sz is large enough
-    const simdMul = sz < 4 ? 0.6 : sz < 16 ? 1.2 : 3.8;
-    const simdBase = cpuBase * simdMul;
-    data[sz]['WASM+SIMD'] = { Chrome: simdBase, Firefox: simdBase * 0.76, Edge: simdBase * 0.97 };
-    // add noise
-    Object.keys(data[sz]).forEach(b => Object.keys(data[sz][b]).forEach(br => { data[sz][b][br] *= 0.9 + Math.random() * 0.2; }));
-  });
-  return data;
+const status=m=>document.getElementById('status').textContent=m;
+
+async function boot(){
+  try{
+    status('downloading WASM backend…');
+    tf.wasm.setWasmPaths('https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-wasm@4.11.0/dist/');
+    await tf.setBackend('wasm'); await tf.ready();
+    await tf.setBackend('cpu');  await tf.ready();
+    ready=true;
+    document.getElementById('runBtn').disabled=false;
+    document.getElementById('runBtn').textContent='▶ Run benchmark';
+    status('ready · backends: wasm + cpu');
+  }catch(e){
+    status('Could not load the WASM backend (offline / CDN blocked): '+e.message);
+  }
 }
 
-function barChart(canvasId, labels, datasets) {
-  const cv = document.getElementById(canvasId);
-  const ctx = cv.getContext('2d');
-  const W = cv.clientWidth * devicePixelRatio, H = cv.clientHeight * devicePixelRatio;
-  cv.width = W; cv.height = H;
-  const pad = { l: 44, r: 12, t: 16, b: 32 };
-  const n = labels.length, nds = datasets.length;
-  const gw = (W - pad.l - pad.r) / n;
-  const bw = gw * 0.7 / nds;
-  const maxVal = Math.max(...datasets.flatMap(d => d.values));
-  ctx.fillStyle = '#0d1117'; ctx.fillRect(0, 0, W, H);
-  ctx.strokeStyle = '#21262d'; ctx.lineWidth = 1;
-  [0, .25, .5, .75, 1].forEach(v => { const y = pad.t + (1 - v) * (H - pad.t - pad.b); ctx.beginPath(); ctx.moveTo(pad.l, y); ctx.lineTo(W - pad.r, y); ctx.stroke(); ctx.fillStyle = '#8b949e'; ctx.font = `${8 * devicePixelRatio}px monospace`; ctx.fillText((maxVal * v).toFixed(0), 2, y + 3); });
-  datasets.forEach((ds, di) => {
-    ds.values.forEach((v, i) => {
-      const x = pad.l + i * gw + gw * 0.15 + di * bw;
-      const barH = (v / maxVal) * (H - pad.t - pad.b);
-      const y = H - pad.b - barH;
-      ctx.fillStyle = ds.color; ctx.fillRect(x, y, bw - 2, barH);
-    });
-  });
-  ctx.fillStyle = '#8b949e'; ctx.font = `${8 * devicePixelRatio}px sans-serif`;
-  labels.forEach((l, i) => { const x = pad.l + i * gw + gw / 2; ctx.fillText(l, x - 8, H - 8); });
+function makeInputs(backend,task){
+  const s=inputs[backend];
+  if(s[task])return s[task];
+  if(task==='vision') s[task]={x:tf.randomNormal([1,96,96,3]), f:tf.randomNormal([3,3,3,8])};
+  else s[task]={a:tf.randomNormal([1,64,256]), b:tf.randomNormal([1,256,64])};
+  return s[task];
+}
+async function timeOp(backend,task){
+  await tf.setBackend(backend);
+  const s=makeInputs(backend,task);
+  const t0=performance.now();
+  let y;
+  if(task==='vision'){ y=tf.conv2d(s.x,s.f,1,'same'); }
+  else { y=tf.tidy(()=>tf.softmax(tf.matMul(s.a,s.b))); }
+  await y.data();               // force the lazy op to actually execute
+  const dt=performance.now()-t0;
+  y.dispose();
+  return dt;
 }
 
-function lineChart(canvasId, labels, datasets) {
-  const cv = document.getElementById(canvasId);
-  const ctx = cv.getContext('2d');
-  const W = cv.clientWidth * devicePixelRatio, H = cv.clientHeight * devicePixelRatio;
-  cv.width = W; cv.height = H;
-  const pad = { l: 44, r: 12, t: 16, b: 32 };
-  const maxVal = Math.max(...datasets.flatMap(d => d.values), 1);
-  ctx.fillStyle = '#0d1117'; ctx.fillRect(0, 0, W, H);
-  ctx.strokeStyle = '#21262d'; ctx.lineWidth = 1;
-  [0, .25, .5, .75, 1].forEach(v => { const y = pad.t + (1 - v) * (H - pad.t - pad.b); ctx.beginPath(); ctx.moveTo(pad.l, y); ctx.lineTo(W - pad.r, y); ctx.stroke(); ctx.fillStyle = '#8b949e'; ctx.font = `${8 * devicePixelRatio}px monospace`; ctx.fillText((maxVal * v).toFixed(1), 2, y + 3); });
-  datasets.forEach(ds => {
-    ctx.beginPath(); ctx.strokeStyle = ds.color; ctx.lineWidth = 2.2 * devicePixelRatio;
-    ds.values.forEach((v, i) => { const x = pad.l + i / (labels.length - 1) * (W - pad.l - pad.r), y = pad.t + (1 - v / maxVal) * (H - pad.t - pad.b); i ? ctx.lineTo(x, y) : ctx.moveTo(x, y); });
-    ctx.stroke();
-  });
-  ctx.fillStyle = '#8b949e'; ctx.font = `${8 * devicePixelRatio}px sans-serif`;
-  labels.forEach((l, i) => { const x = pad.l + i / (labels.length - 1) * (W - pad.l - pad.r); ctx.fillText(l, x - 8, H - 8); });
+const mean=a=>a.reduce((x,y)=>x+y,0)/a.length;
+const std=a=>{const m=mean(a);return Math.sqrt(a.reduce((s,v)=>s+(v-m)*(v-m),0)/a.length);};
+// robust mean: drop the worst 10% (GC / scheduling spikes) so the estimate is cleaner
+function trimMean(a){if(a.length<8)return mean(a);const s=a.slice().sort((x,y)=>x-y);return mean(s.slice(0,Math.ceil(s.length*0.9)));}
+
+async function trial(){
+  for(const task of ['vision','nlp']){
+    const w=await timeOp('wasm',task);
+    const c=await timeOp('cpu',task);
+    samples[task].wasm.push(w); samples[task].cpu.push(c);
+    if(samples[task].wasm.length>1500){samples[task].wasm.shift();samples[task].cpu.shift();}
+    meanHist[task].wasm.push(trimMean(samples[task].wasm));
+    meanHist[task].cpu.push(trimMean(samples[task].cpu));
+    if(meanHist[task].wasm.length>220){meanHist[task].wasm.shift();meanHist[task].cpu.shift();}
+  }
+  trials++;
+  render();
 }
 
-function run() {
-  const data = simulate();
-  const lbls = TENSOR_SIZES.map(s => s >= 1024 ? (s / 1024) + 'K' : s + '');
-  // Throughput bar chart (Chrome only)
-  barChart('throughput', lbls, ['WASM+SIMD', 'WASM', 'JS CPU'].map(b => ({ color: BACKEND_COLORS[b], values: TENSOR_SIZES.map(sz => data[sz][b].Chrome) })));
-  // Speedup line chart per browser
-  lineChart('speedup', lbls, BROWSERS.map(br => ({ color: BROWSER_COLORS[br], values: TENSOR_SIZES.map(sz => (data[sz]['WASM+SIMD'][br] / data[sz]['JS CPU'][br])) })));
-  // Init latency bar (simulated fixed values per backend)
-  const initData = [{ name: 'WASM+SIMD', color: '#a371f7', val: 320 }, { name: 'WASM', color: '#58a6ff', val: 180 }, { name: 'JS CPU', color: '#f85149', val: 15 }, { name: 'WebGL', color: '#3fb950', val: 1200 }];
-  barChart('init', initData.map(d => d.name), [{ color: '#a371f7', values: initData.map(d => d.val) }]);
-  // SIMD gain
-  lineChart('simd', lbls, [{ color: '#3fb950', values: TENSOR_SIZES.map(sz => data[sz]['WASM+SIMD'].Chrome / data[sz]['WASM'].Chrome) }]);
-  // Table
-  const tbl = document.getElementById('tbl');
-  const bestBackend = (br) => {
-    let best = 'WASM+SIMD', bestV = 0;
-    ['WASM+SIMD', 'WASM', 'JS CPU'].forEach(b => { const v = data[1024][b][br]; if (v > bestV) { bestV = v; best = b; } });
-    return best;
-  };
-  tbl.innerHTML = `<tr><th>Browser</th><th>WASM+SIMD</th><th>WASM</th><th>JS CPU</th><th>Best backend</th></tr>` +
-    BROWSERS.map(br => `<tr><td>${br}</td>${['WASM+SIMD', 'WASM', 'JS CPU'].map(b => `<td>${data[1024][b][br].toFixed(0)}</td>`).join('')}<td class="win">${bestBackend(br)}</td></tr>`).join('');
-  // Metrics
-  const el = document.getElementById('metrics');
-  const chromeSIMD = TENSOR_SIZES.map(sz => data[sz]['WASM+SIMD'].Chrome / data[sz]['JS CPU'].Chrome);
-  const avgSpeedup = chromeSIMD.reduce((a, b) => a + b) / chromeSIMD.length;
-  const crossover = TENSOR_SIZES.find(sz => data[sz]['WASM+SIMD'].Chrome > data[sz]['JS CPU'].Chrome) || '?';
-  el.innerHTML = [
-    { lbl: 'Peak WASM speedup', num: Math.max(...chromeSIMD).toFixed(1) + '×', unit: 'vs. JS CPU (Chrome)' },
-    { lbl: 'Avg speedup', num: avgSpeedup.toFixed(1) + '×', unit: 'over all sizes' },
-    { lbl: 'Crossover point', num: crossover + ' KB', unit: 'WASM beats JS' },
-    { lbl: 'SIMD gain', num: (data[4096]['WASM+SIMD'].Chrome / data[4096]['WASM'].Chrome).toFixed(1) + '×', unit: 'at 4K tensors' }
-  ].map(m => `<div class="metric"><div class="lbl">${m.lbl}</div><div class="num">${m.num}</div><div class="unit">${m.unit}</div></div>`).join('');
+// ---- charts ----
+function hist(id,wasmA,cpuA){
+  const cv=document.getElementById(id),x=cv.getContext('2d'),r=Math.min(devicePixelRatio||1,2);
+  const W=cv.clientWidth,H=150;cv.width=W*r;cv.height=H*r;x.setTransform(r,0,0,r,0,0);
+  x.clearRect(0,0,W,H);
+  const pad={l:8,r:8,t:8,b:18};
+  const all=wasmA.concat(cpuA); if(all.length<2)return;
+  let mn=Math.min(...all),mx=Math.max(...all);const R=(mx-mn)||1;mn-=R*0.05;mx+=R*0.05;
+  const BINS=26;
+  const binOf=a=>{const c=new Array(BINS).fill(0);a.forEach(v=>{let b=Math.floor((v-mn)/(mx-mn)*BINS);b=b<0?0:b>=BINS?BINS-1:b;c[b]++;});return c;};
+  const hw=binOf(wasmA),hc=binOf(cpuA),cmax=Math.max(...hw,...hc)||1;
+  const bx=b=>pad.l+(b/BINS)*(W-pad.l-pad.r), bw=(W-pad.l-pad.r)/BINS;
+  const Y=c=>pad.t+(1-c/cmax)*(H-pad.t-pad.b);
+  const drawArea=(h,fill,stroke)=>{x.beginPath();x.moveTo(bx(0),Y(0));for(let b=0;b<BINS;b++){x.lineTo(bx(b)+bw/2,Y(h[b]));}x.lineTo(bx(BINS-1)+bw,Y(0));x.closePath();x.fillStyle=fill;x.fill();
+    x.beginPath();for(let b=0;b<BINS;b++){const px=bx(b)+bw/2,py=Y(h[b]);b?x.lineTo(px,py):x.moveTo(px,py);}x.strokeStyle=stroke;x.lineWidth=2;x.stroke();};
+  drawArea(hc,'rgba(251,113,133,.18)',COL.cpu);
+  drawArea(hw,'rgba(163,113,247,.22)',COL.wasm);
+  // mean markers
+  [[wasmA,COL.wasm],[cpuA,COL.cpu]].forEach(([a,c])=>{const m=trimMean(a);const px=pad.l+(m-mn)/(mx-mn)*(W-pad.l-pad.r);
+    x.strokeStyle=c;x.setLineDash([4,3]);x.beginPath();x.moveTo(px,pad.t);x.lineTo(px,H-pad.b);x.stroke();x.setLineDash([]);});
+  x.fillStyle=COL.muted;x.font='9px ui-monospace,monospace';
+  x.fillText(mn.toFixed(1)+' ms',pad.l,H-5);x.fillText(mx.toFixed(1)+' ms',W-pad.r-34,H-5);
 }
-document.getElementById('run').onclick = run;
-run();
+function conv(id,wasmA,cpuA){
+  const cv=document.getElementById(id),x=cv.getContext('2d'),r=Math.min(devicePixelRatio||1,2);
+  const W=cv.clientWidth,H=140;cv.width=W*r;cv.height=H*r;x.setTransform(r,0,0,r,0,0);
+  x.clearRect(0,0,W,H);
+  const pad={l:40,r:8,t:8,b:16};
+  const all=wasmA.concat(cpuA);if(all.length<2)return;
+  let mx=Math.max(...all)*1.1, mn=0;const R=mx-mn||1;
+  x.strokeStyle='rgba(255,255,255,.06)';x.lineWidth=1;x.font='9px ui-monospace,monospace';
+  for(let i=0;i<=3;i++){const y=pad.t+i*(H-pad.t-pad.b)/3;x.beginPath();x.moveTo(pad.l,y);x.lineTo(W-pad.r,y);x.stroke();x.fillStyle=COL.muted;x.fillText((mx-i*R/3).toFixed(1),3,y+3);}
+  const line=(a,col)=>{x.beginPath();x.strokeStyle=col;x.lineWidth=2;a.forEach((v,i)=>{const X=pad.l+(a.length<2?0:i/(a.length-1))*(W-pad.l-pad.r),Y=pad.t+(1-(v-mn)/R)*(H-pad.t-pad.b);i?x.lineTo(X,Y):x.moveTo(X,Y);});x.stroke();};
+  line(cpuA,COL.cpu);line(wasmA,COL.wasm);
+}
+function fmtSpeedup(task){
+  const w=samples[task].wasm,c=samples[task].cpu;
+  if(w.length<3)return'—';
+  return (trimMean(c)/trimMean(w)).toFixed(2)+'×';
+}
+function render(){
+  document.getElementById('mTrials').textContent=trials;
+  document.getElementById('mVis').textContent=fmtSpeedup('vision');
+  document.getElementById('mNlp').textContent=fmtSpeedup('nlp');
+  // noise = average relative standard error across the 4 series (shrinks ~1/sqrt(N))
+  let se=[],ok=true;
+  for(const t of ['vision','nlp'])for(const b of ['wasm','cpu']){const a=samples[t][b];if(a.length<3){ok=false;break;}se.push(std(a)/Math.sqrt(a.length)/trimMean(a));}
+  document.getElementById('mNoise').textContent=ok?'±'+(mean(se)*100).toFixed(1)+'%':'—';
+  hist('histV',samples.vision.wasm,samples.vision.cpu);
+  hist('histN',samples.nlp.wasm,samples.nlp.cpu);
+  conv('convV',meanHist.vision.wasm,meanHist.vision.cpu);
+  conv('convN',meanHist.nlp.wasm,meanHist.nlp.cpu);
+}
+
+async function warmup(){
+  status('warming up backends…');
+  for(const t of ['vision','nlp'])for(const b of ['wasm','cpu'])for(let i=0;i<3;i++)await timeOp(b,t);
+  status('benchmarking — watch the noise wash out');
+}
+async function loopTrials(){
+  if(!running)return;
+  await trial();
+  timer=setTimeout(loopTrials,30);   // small gap keeps the UI responsive
+}
+document.getElementById('runBtn').onclick=async()=>{
+  if(!ready)return;
+  if(running){running=false;clearTimeout(timer);document.getElementById('runBtn').textContent='▶ Resume';status('paused');return;}
+  running=true;document.getElementById('runBtn').textContent='⏸ Pause';
+  if(trials===0)await warmup();
+  loopTrials();
+};
+document.getElementById('resetBtn').onclick=()=>{
+  running=false;clearTimeout(timer);trials=0;
+  for(const t of ['vision','nlp']){samples[t].wasm=[];samples[t].cpu=[];meanHist[t].wasm=[];meanHist[t].cpu=[];}
+  if(ready){document.getElementById('runBtn').textContent='▶ Run benchmark';status('ready · backends: wasm + cpu');}
+  render();
+};
+window.addEventListener('resize',render);
+boot();
 </script>
 </body>
 </html>
