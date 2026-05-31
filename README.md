@@ -2,10 +2,10 @@
 
 *Cross-browser inference performance analysis of TensorFlow.js backends using Selenium-automated timing.*
 
-> 📄 **Companion artifact for the IMC '23 paper** — *"Benchmarking WebAssembly Performance in Real-World Applications and Libraries"* (ACM Internet Measurement Conference, Oct 24–26 2023, Montréal, Canada).
+> 📄 **Companion artifact for the paper** — *"Benchmarking WebAssembly Performance in Real-World Applications and Libraries."*
 > This repository holds the machine-learning / TensorFlow.js portion of that study: the benchmark harness, pre-collected timing data, and the analysis behind the **15–20× WASM speedups** and the V8 "first-argument advantage" finding.
 >
-> • **Read the paper:** [`imc2023_benchmarking_wasm_SUBMISSION.pdf`](imc2023_benchmarking_wasm_SUBMISSION.pdf)
+> • **Read the paper:** [`benchmarking_wasm_paper.pdf`](benchmarking_wasm_paper.pdf)
 > • **Results summary (web):** [`index.html`](index.html) — a one-page visual overview
 > • **Source:** [github.com/woodyhoko/tfjs_wasm](https://github.com/woodyhoko/tfjs_wasm)
 
@@ -131,7 +131,7 @@ Additional findings:
 
 ## 7. References
 
-1. *Benchmarking WebAssembly Performance in Real-World Applications and Libraries.* **IMC '23**, ACM Internet Measurement Conference, Oct 24–26 2023, Montréal, Canada. — see [`imc2023_benchmarking_wasm_SUBMISSION.pdf`](imc2023_benchmarking_wasm_SUBMISSION.pdf).
+1. *Benchmarking WebAssembly Performance in Real-World Applications and Libraries.* — see [`benchmarking_wasm_paper.pdf`](benchmarking_wasm_paper.pdf).
 2. This repository — TensorFlow.js WASM-vs-CPU benchmark pipeline, data, and notebooks: [github.com/woodyhoko/tfjs_wasm](https://github.com/woodyhoko/tfjs_wasm).
 3. Companion benchmark repos: [`kalign-wasm`](https://github.com/wasm-benchmarking/kalign-wasm), [`kalign-test`](https://github.com/wasm-benchmarking/kalign-test), [`openssl-wasm`](https://github.com/wasm-benchmarking/openssl-wasm).
 4. A. Haas et al. "Bringing the Web up to Speed with WebAssembly." *PLDI '17*, ACM SIGPLAN, pp. 185–200. [doi:10.1145/3062341.3062363](https://doi.org/10.1145/3062341.3062363).
